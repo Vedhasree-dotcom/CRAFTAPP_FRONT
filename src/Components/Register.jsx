@@ -11,7 +11,7 @@ export default function Register() {
 
     useEffect(() => {
         if(!loading && (token || user)) {
-             navigate("/home")
+             navigate("/")
         }
     }, [loading, token, user, navigate]);
 

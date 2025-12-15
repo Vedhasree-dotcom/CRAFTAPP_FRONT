@@ -194,6 +194,7 @@ body{
   background-color:rgb(127, 79, 20) ;
   color: #fff;
   border: none;
+  border-radius: 30px;
   cursor: pointer;
   text-decoration: none;
   font-size: 14px;
@@ -209,7 +210,7 @@ body{
   width: 400px;
   height: 400px;
   object-fit: cover;
-  border-radius: 40%;
+  border-radius: 30%;
 }
 
 
@@ -321,7 +322,7 @@ body{
 .footer-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  gap: 20px;
 }
 
 .footer-brand h2 {
@@ -348,7 +349,7 @@ body{
   font-size: 16px;
   cursor: pointer;
   color: white;
-  padding-left: 40px;
+  padding-left: 10px;
 }
 
 .footer-links p:hover {

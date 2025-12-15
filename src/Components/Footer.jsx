@@ -24,6 +24,15 @@ export default function Footer() {
         </div>
 
         <div className="footer-links">
+          <h4>Main Links</h4>
+           <p><Link to="/" className="text-light text-decoration-none"> Home</Link></p>
+            <p><Link to="/about" className="text-light text-decoration-none">About Us</Link></p>
+            <p><Link to="/crafts" className="text-light text-decoration-none">Crafts</Link></p>
+            <p><Link to="/findcraft" className="text-light text-decoration-none">Find craft</Link></p>
+
+        </div>
+
+        <div className="footer-links">
           <h4>Support</h4>
           <p><Link to="/" className="text-light text-decoration-none">Help center</Link></p>
           <p><Link to="/" className="text-light text-decoration-none">Privacy policy</Link></p>
