@@ -19,7 +19,8 @@ body{
   left: 0;
   width: 100vw;
   z-index: 1000;
-  background: transparent;
+  background: brown;
+  opacity: 4;
 }
 
 /* Other pages navbar */
@@ -119,8 +120,8 @@ body{
 } */
 
 .home-hero {
-  min-height: 100vh;
-  background-image: url("https://images.pexels.com/photos/5660156/pexels-photo-5660156.jpeg");
+  height: 100vh;
+  background-image: url("");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
