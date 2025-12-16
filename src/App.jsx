@@ -9,8 +9,10 @@ import Crafts from './Components/Pages/Crafts';
 import FindCraft from './Components/Pages/FindCraft';
 import Register from './Components/Register'
 import Login from './Components/Login';
+import VerifyOTP from './Components/VerifyOtp';
 import Footer from './Components/Footer';
 import TutorialStep from './Components/tutorials/TutorialStep'
+import ProtectedRoute from './Components/ProtectedRoute';
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 function AppContent() {
@@ -22,12 +24,32 @@ function AppContent() {
     <>
       <Navbar isHome={isHome} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/crafts" element={<Crafts />} />
-        <Route path="/findcraft" element={<FindCraft />} />
+        <Route path="/" element={
+          <ProtectedRoute>
+          <Home/>
+          </ProtectedRoute>} />
+
+        <Route path="/about" element={
+          <ProtectedRoute>
+          <About />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/crafts" element={
+          <ProtectedRoute>
+          <Crafts />
+          </ProtectedRoute>} />
+
+        <Route path="/findcraft" element={
+          <ProtectedRoute>
+          <FindCraft />
+          </ProtectedRoute>} />
+
         <Route path="/register" element={<Register/>} />
         <Route path="/login" element={<Login/>} />
+
+        <Route path="/verify-otp" element={<VerifyOTP/>} />
+
         <Route path="/tutorial" element={<TutorialStep/>} />
 
       </Routes>
