@@ -97,10 +97,33 @@ export default function Login() {
         )}
 
         <button type="submit" className="signin">
-          Login
+          Submit
         </button>
 
-        <Link to="/register">Sign Up here</Link>
+        <div className="login-links" 
+        style={{marginTop: "15px", display: "flex", 
+        justifyContent: "space-between"}}>
+
+         <Link to="/forgot-password"
+          style={{color: "chocolate",
+            textDecoration: "none",
+            fontWeight: "500",
+            
+          }}>
+            Forgot Password?
+        </Link>
+
+        <Link to="/register" 
+        style={{ 
+         color: "chocolate",
+         textDecoration: "none",
+          fontWeight: "500",
+        
+         }}>
+          Sign Up</Link>
+
+        </div>
+
       </form>
       </div>
   );

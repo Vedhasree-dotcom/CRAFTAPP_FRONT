@@ -1,5 +1,5 @@
 
-.login{
+.register{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,8 +49,8 @@
   color: #5e5b5b;
 }
 
-.signin{
-    margin-top: 30px;
+.signup{
+    margin: 20px;
     background-color: brown;
     padding: 8px;
     border-radius: 10px;
