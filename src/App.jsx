@@ -20,9 +20,14 @@ function AppContent() {
    const location = useLocation();
   const isHome = location.pathname === "/"; 
 
+  const hideLayoutRoutes = ['/login', '/register'];
+  const shouldHideLayout = hideLayoutRoutes.includes(location.pathname);
+
+
   return (
     <>
-      <Navbar isHome={isHome} />
+      {!shouldHideLayout && <Navbar isHome={isHome}  />}
+
       <Routes>
         <Route path="/" element={
           <ProtectedRoute>
@@ -54,7 +59,7 @@ function AppContent() {
 
       </Routes>
 
-      <Footer/>
+      {!shouldHideLayout && <Footer />}
  
 
     </>

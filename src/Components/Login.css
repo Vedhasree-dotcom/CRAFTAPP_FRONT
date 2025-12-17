@@ -1,0 +1,29 @@
+
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    margin: 40px 320px;
+}
+
+.form{
+  width: 50vw;
+  margin-top: 60px;
+  margin-left: 200px;
+  padding: 30px ;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-control{
+    margin-top: 20px;
+    width: 100%;
+
+}
+.signin{
+    margin-top: 20px;
+    background-color: brown;
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+}
