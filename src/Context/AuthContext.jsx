@@ -64,7 +64,7 @@ export function AuthProvider({children}) {
         setPendingEmail(form.email);   // verifying email for otp sending
         return res;
     };
-
+   
     const verifyOTP = async(email, otp) => {
         const res = await api.post("/api/auth/verify-otp", { email, otp });
         if(res?.data?.accessToken) {
@@ -75,18 +75,34 @@ export function AuthProvider({children}) {
         return res;
     };
 
+    // forgot password - send OTP / reset link to email
+   const forgotPassword = async (email) => {
+     const res = await api.post("/api/auth/forgot-password", { email });
+     setPendingEmail(email); 
+     return res;
+    };
+
+
     // //logout function
     const logout = () => {
-        setToken(null);
-        localStorage.removeItem("token");
-        setUser(null);
-        localStorage.removeItem("user");
-    };
+    // tell backend to clear refresh cookie and stored refresh token
+    api.post("/api/auth/logout").catch(() => {});
+    setToken(null);
+    setUser(null);
+    setPendingEmail(null);
+    try {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+    } catch (e) {
+      console.warn("AuthContext.logout: failed to clear storage", e);
+    }
+    setAuthToken(null);
+  };
 
 
     return (
         <AuthContext.Provider 
-        value={{token, user, pendingEmail, loading, register, login, verifyOTP}}
+        value={{token, user, pendingEmail, loading, register, login, verifyOTP, forgotPassword, logout}}
         >
         {children}
         </AuthContext.Provider>

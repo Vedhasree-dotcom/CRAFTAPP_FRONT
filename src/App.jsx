@@ -11,6 +11,7 @@ import Register from './Components/Register'
 import Login from './Components/Login';
 import VerifyOTP from './Components/VerifyOtp';
 import ForgotPassword from './Components/ForgotPassword'
+import ResetPassword from './Components/ResetPassword';
 import Footer from './Components/Footer';
 import TutorialStep from './Components/tutorials/TutorialStep'
 import ProtectedRoute from './Components/ProtectedRoute';
@@ -21,7 +22,7 @@ function AppContent() {
    const location = useLocation();
   const isHome = location.pathname === "/"; 
 
-  const hideLayoutRoutes = ['/login', '/register', '/verify-otp', '/forgot-password'];
+  const hideLayoutRoutes = ['/login', '/register', '/verify-otp', '/forgot-password', '/reset-password'];
   const shouldHideLayout = hideLayoutRoutes.includes(location.pathname);
 
 
@@ -57,6 +58,8 @@ function AppContent() {
         <Route path="/verify-otp" element={<VerifyOTP/>} />
 
         <Route path="/forgot-password" element={<ForgotPassword/>} />
+
+        <Route path="/reset-password" element={<ResetPassword/>} />
 
         <Route path="/tutorial" element={<TutorialStep/>} />
 

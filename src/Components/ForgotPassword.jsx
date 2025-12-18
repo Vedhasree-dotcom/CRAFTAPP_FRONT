@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css"; 
+import { useAuth } from "../Context/AuthContext";
+import "./Login.css";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -8,6 +9,8 @@ export default function ForgotPassword() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const { forgotPassword } = useAuth(); 
+  
   const navigate = useNavigate();
 
   const validate = () => {
@@ -26,16 +29,20 @@ export default function ForgotPassword() {
     try {
       setLoading(true);
 
-      // 🔹 API call (adjust endpoint if needed)
-      await fetch("http://localhost:5000/api/auth/forgot-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+      //  AuthContext 
+      const res = await forgotPassword(email);
 
-      setMessage("Password reset link sent to your email");
+      setMessage(res?.data?.message || "Password reset OTP sent to your email");
+
+      // redirect after few seconds
+      setTimeout(() => {
+        navigate("/verify-otp");
+      }, 2000);
+
     } catch (err) {
-      alert("Something went wrong. Try again.");
+      setMessage(
+        err?.response?.data?.message || "Something went wrong. Try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -63,16 +70,17 @@ export default function ForgotPassword() {
           {loading ? "Sending..." : "Send Reset Link"}
         </button>
 
-        <div className="login-links" style={{marginTop: "20px",
-           marginRight: "280px"}}>
-          <Link to="/login" 
-          style={{ 
-         color: "chocolate",
-         textDecoration: "none",
-          fontWeight: "400",
-        
-         }}
-          
+        <div
+          className="login-links"
+          style={{ marginTop: "20px", marginRight: "280px" }}
+        >
+          <Link
+            to="/login"
+            style={{
+              color: "chocolate",
+              textDecoration: "none",
+              fontWeight: "400",
+            }}
           >
             Back to Login👈
           </Link>
