@@ -50,9 +50,10 @@
 }
 
 .signup{
+    width: 90%;
     margin: 20px;
     background-color: brown;
-    padding: 8px;
+    padding: 8px 100px ;
     border-radius: 10px;
     border: none;
 }

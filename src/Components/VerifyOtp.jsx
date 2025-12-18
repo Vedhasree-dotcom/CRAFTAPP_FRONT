@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import api from "../Services/api";
 
+
 export default function VerifyOTP() {
   const [otp, setOtp] = useState("");
   const [verified, setVerified] = useState(false);
@@ -17,34 +18,38 @@ export default function VerifyOTP() {
   const purpose = location?.state?.purpose || "login"; // "login" or "reset"
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!/^\d{6}$/.test(otp)) {
-      return alert("OTP must be a 6 digit number");
+  if (!/^\d{6}$/.test(otp)) {
+    return alert("OTP must be a 6 digit number");
+  }
+
+  try {
+    setLoading(true);
+
+    if (purpose === "login") {
+      // ✅ LOGIN OTP
+      const res = await verifyOTP(email, otp);
+      alert(res.data.message);
+      setVerified(true);
+
+    } else {
+      // ✅ RESET PASSWORD OTP (IMPORTANT)
+      const res = await api.post("/api/auth/verify-reset-otp", {
+        email,
+        otp,
+      });
+
+      alert(res.data.message);
+      navigate("/reset-password", { state: { email, otp } });
     }
+  } catch (err) {
+    alert(err?.response?.data?.message || "Invalid OTP");
+  } finally {
+    setLoading(false);
+  }
+};
 
-    try {
-      setLoading(true);
-
-      if (purpose === "login") {
-        // Login OTP verification
-        const res = await verifyOTP(email, otp);
-        alert(res.data.message);
-        setVerified(true);
-
-      } else {
-        // Forgot-password OTP verification → redirect to ResetPassword
-        // We just verify OTP without changing password yet
-        const res = await api.post("/api/auth/verify-reset-otp", { email, otp });
-        alert(res.data.message || "OTP verified. Please reset your password");
-        navigate("/reset-password", { state: { email, otp } });
-      }
-    } catch (err) {
-      alert(err?.response?.data?.message || "Invalid OTP");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   // Redirect after login OTP verified
   useEffect(() => {

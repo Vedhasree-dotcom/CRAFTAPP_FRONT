@@ -48,7 +48,12 @@ export default function Login() {
 
     try {
       await login(form);
-      navigate("/verify-otp", { state: { email: form.email } });
+navigate("/verify-otp", {
+  state: {
+    email: form.email,  
+    purpose: "login",
+  },
+});
     } catch (err) {
       alert(err?.response?.data?.message || err.message);
     }

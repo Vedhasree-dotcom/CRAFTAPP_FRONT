@@ -22,29 +22,24 @@ const Navbar = ({ isHome }) => {
           </div>
         </div>
         <Link to="/findcraft">FindCraft</Link>
+
+        <button style={{ 
+          marginLeft: "15px", 
+          padding: "6px 16px",
+          border: "none", 
+          borderRadius: "4px",
+          backgroundColor: "peachpuff",
+          fontWeight: "500",
+          cursor: "pointer",
+        }}> 
+          <Link to="/login" style={{color: "brown"}}>Login</Link>
+          </button>
       </div>
 
-        {/* {user ? (
-          <div className="dropdown">
-            <Link to="/profile">Profile ▾</Link> */}
-            {/* <div className="dropdown-menu">
-              <Link to="/profile">My Profile</Link>
-              <Link to="/my-projects">My Projects</Link>
-              <Link to="/submit">Submit Craft</Link> */}
+        
 
-              {/* {user.role === "admin" && (
-                <Link to="/admin">Admin Dashboard</Link>
-              )}
+      
 
-              <button onClick={logout} className="logout-btn">
-                Logout
-              </button>
-            </div>
-          </div>
-        ) : (
-          <Link to="/login" className="login-btn">Login</Link>
-        )}
-      </div> */} 
     </nav>
   );
 };

@@ -10,7 +10,7 @@ export default function ForgotPassword() {
   const [loading, setLoading] = useState(false);
 
   const { forgotPassword } = useAuth(); 
-  
+
   const navigate = useNavigate();
 
   const validate = () => {
@@ -36,7 +36,13 @@ export default function ForgotPassword() {
 
       // redirect after few seconds
       setTimeout(() => {
-        navigate("/verify-otp");
+        navigate("/verify-otp", {
+  state: {
+    email,
+    purpose: "reset",
+  },
+});
+
       }, 2000);
 
     } catch (err) {
