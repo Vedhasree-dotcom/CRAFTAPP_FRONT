@@ -12,15 +12,16 @@ import Login from './Components/Login';
 import VerifyOTP from './Components/VerifyOtp';
 import ForgotPassword from './Components/ForgotPassword'
 import ResetPassword from './Components/ResetPassword';
+import AdminDashboard from './Components/Admin/AdminDashboard';
 import Footer from './Components/Footer';
 import TutorialStep from './Components/tutorials/TutorialStep'
 import ProtectedRoute from './Components/ProtectedRoute';
+import AdminProtectedRoute from './Components/Admin/AdminProtectedRoute';
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 function AppContent() {
 
    const location = useLocation();
-  const isHome = location.pathname === "/"; 
 
   const hideLayoutRoutes = ['/login', '/register', '/verify-otp', '/forgot-password', '/reset-password'];
   const shouldHideLayout = hideLayoutRoutes.includes(location.pathname);
@@ -28,7 +29,7 @@ function AppContent() {
 
   return (
     <>
-      {!shouldHideLayout && <Navbar isHome={isHome}  />}
+      {!shouldHideLayout && <Navbar/>}
 
       <Routes>
         <Route path="/" element={
@@ -60,6 +61,12 @@ function AppContent() {
         <Route path="/forgot-password" element={<ForgotPassword/>} />
 
         <Route path="/reset-password" element={<ResetPassword/>} />
+
+        <Route path="/admin/dashboard" element={
+             <AdminProtectedRoute>
+               <AdminDashboard />
+            </AdminProtectedRoute>
+        } />
 
         <Route path="/tutorial" element={<TutorialStep/>} />
 

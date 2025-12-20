@@ -28,13 +28,12 @@ export default function VerifyOTP() {
     setLoading(true);
 
     if (purpose === "login") {
-      // ✅ LOGIN OTP
+
       const res = await verifyOTP(email, otp);
       alert(res.data.message);
       setVerified(true);
 
     } else {
-      // ✅ RESET PASSWORD OTP (IMPORTANT)
       const res = await api.post("/api/auth/verify-reset-otp", {
         email,
         otp,
