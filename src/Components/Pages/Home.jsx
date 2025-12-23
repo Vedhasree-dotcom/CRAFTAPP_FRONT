@@ -63,7 +63,7 @@ function Home() {
           From origami and quilling to handmade cards and wall art, 
           paper crafting transforms ordinary sheets into beautiful creations.
         </Card.Text>
-        <Link to="/crafts/category/paper"
+        <Link to="/crafts/paper"
         style={{
           backgroundColor: "brown",
           color: "white",
@@ -88,7 +88,7 @@ function Home() {
           Handcrafted home décor adds warmth, personality, 
           home décor crafts blend traditional artistry with modern design
         </Card.Text>
-        <Link to="/crafts/category/home"
+        <Link to="/crafts/home-decor"
         style={{
           backgroundColor: "brown",
           color: "white",
@@ -112,7 +112,7 @@ function Home() {
           stunning and expressive artwork.
         </Card.Text>
 
-          <Link to="/crafts/category/painting"
+          <Link to="/crafts/painting"
           style={{
             backgroundColor: "brown",
             color: "white",

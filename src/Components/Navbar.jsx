@@ -24,7 +24,13 @@ const Navbar = () => {
 
             <Link to="/crafts">Crafts </Link>
             
-          <Link to="/findcraft">FindCraft</Link>
+          {user?.role !== "admin" && (
+              <Link to="/findcraft">FindCraft</Link>
+            )}
+            
+          {user?.role === "admin" && (
+              <Link to="/admin/dashboard">Dashboard</Link>
+            )}
 
           {!user ? (
             <button className="auth-btn">
