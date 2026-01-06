@@ -70,7 +70,6 @@ export default function FindCraft() {
       <h1>Find Craft by Materials</h1>
       <p>Select materials you have and get craft ideas</p>
 
-      {/* Image Upload */}
       <div className="upload-box">
         <label className="upload-btn">
           📷 Take / Upload Image
@@ -90,7 +89,6 @@ export default function FindCraft() {
         </div>
       )}
 
-      {/* Materials */}
       <div className="materials-box">
         <h3>Select Materials</h3>
         <div className="materials-grid">
@@ -107,7 +105,6 @@ export default function FindCraft() {
         </div>
       </div>
 
-      {/* Button */}
       <button
         className="find-btn"
         onClick={handleFindCrafts}
@@ -116,7 +113,6 @@ export default function FindCraft() {
         {loading ? "Finding..." : "Find Crafts"}
       </button>
 
-      {/* Results */}
       {crafts.length > 0 && (
         <div className="results">
           <h2>Suggested Crafts</h2>

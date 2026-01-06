@@ -6,6 +6,7 @@ import Navbar from './Components/Navbar'
 import Home from './Components/Pages/Home'
 import About from './Components/Pages/About'
 import Crafts from './Components/Pages/Crafts';
+import AllCrafts from './Components/Pages/AllCrafts'
 import Paper from './Components/Pages/Paper'
 import FindCraft from './Components/Pages/FindCraft';
 import Register from './Components/Register'
@@ -45,7 +46,7 @@ function AppContent() {
         } />
         
         <Route path="/crafts" element={<Crafts />}>
-          {/* <Route index element={<All />} /> */}
+          <Route index element={<AllCrafts />} />
           <Route path="paper" element={<Paper/>} />
           {/* <Route path="home-decor" element={<HomeDecor />} />
           <Route path="knitting" element={<Knitting />} />
