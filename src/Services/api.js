@@ -3,7 +3,8 @@ import axios from 'axios';
 // Vite exposes env vars via import.meta.env and 
 // requires the VITE_prefix for client-side vars
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 // Creating an Axios Instance
 const api = axios.create({
