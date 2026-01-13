@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar">
+      <nav className="navbar position-fixed top-0">
         <h2 className="logo">CraftMate</h2>
 
         <div className="nav-right">

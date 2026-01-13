@@ -30,7 +30,7 @@ export default function AllCrafts() {
   if (loading) return <p>Loading crafts...</p>;
 
   return (
-    <div className="all-crafts-page">
+    <div className="all-crafts-page" >
       <h2>All Crafts</h2>
 
       <input
@@ -39,12 +39,19 @@ export default function AllCrafts() {
         value={searchTerm}
         onChange={e => setSearchTerm(e.target.value)}
         className="search-input"
-        style={{ padding: "8px", marginBottom: "20px", width: "100%" }}
+        style={{ padding: "8px",
+           marginBottom: "20px", 
+           backgroundColor: "#f0f0f0", 
+           border: "none",
+           color: "black",
+           borderRadius: "5px", 
+            width: "100%" 
+          }}
       />
 
       <div
         className="crafts-grid"
-        style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}
+        style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}
       >
         {filteredCrafts.length === 0 ? (
           <p>No crafts found</p>
@@ -54,8 +61,9 @@ export default function AllCrafts() {
               key={craft._id}
               className="craft-card"
               style={{
-                border: "1px solid #ddd",
+                border: "1px solid #d3cfcfff",
                 borderRadius: "10px",
+                boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
                 padding: "15px",
                 width: "250px",
               }}
@@ -72,12 +80,12 @@ export default function AllCrafts() {
                 }}
               />
 
-              <h3>{craft.title}</h3>
+              <h3 style={{fontSize: "18px"}}>{craft.title}</h3>
               <p style={{ fontSize: "14px", color: "#777" }}>
                 {craft.category}
               </p>
-              <p>{craft.description}</p>
-              <p><strong>Price:</strong> ₹{craft.price}</p>
+              <p style={{fontSize: "14px", fontFamily: "Arial, sans-serif"}}>{craft.description}</p>
+              <p style={{color: "brown"}}><strong>Price:</strong> ₹{craft.price}</p>
 
               <div
                 style={{
@@ -90,8 +98,9 @@ export default function AllCrafts() {
                   to={`/crafts/${craft._id}`}
                   style={{
                     padding: "6px 12px",
-                    background: "#2196F3",
+                    background: "brown",
                     color: "#fff",
+                    fontSize: "14px",
                     borderRadius: "4px",
                     textDecoration: "none",
                   }}

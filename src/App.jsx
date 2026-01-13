@@ -8,6 +8,7 @@ import About from './Components/Pages/About'
 import Crafts from './Components/Pages/Crafts';
 import AllCrafts from './Components/Pages/AllCrafts'
 import Paper from './Components/Pages/Paper'
+import Homedecor from './Components/Pages/Homedecor'
 import FindCraft from './Components/Pages/FindCraft';
 import Register from './Components/Register'
 import Login from './Components/Login';
@@ -48,10 +49,10 @@ function AppContent() {
         <Route path="/crafts" element={<Crafts />}>
           <Route index element={<AllCrafts />} />
           <Route path="paper" element={<Paper/>} />
-          {/* <Route path="home-decor" element={<HomeDecor />} />
-          <Route path="knitting" element={<Knitting />} />
+          <Route path="home-decor" element={<Homedecor />} />
+          {/* <Route path="knitting" element={<Knitting />} />
           <Route path="painting" element={<Painting />} />
-          <Route path="clay" element={<Clay />} /> */}
+          <Route path="clay" element={<Clay />} /> */} 
         </Route>
 
          
