@@ -5,7 +5,7 @@ export default function Crafts() {
     <div className="crafts-container" style={{ display: "flex", marginTop: "80px" }}>
       <aside className="crafts-sidebar">
         <h4>Categories</h4>
-        <ul style={{marginTop: "20px"}}>
+        <ul style={{marginTop: "30px"}}>
           
           <li><Link to="paper">Paper Crafts</Link></li>
           <li><Link to="home-decor">Home Decor</Link></li>

@@ -31,7 +31,7 @@ export default function AllCrafts() {
 
   return (
     <div className="all-crafts-page" >
-      <h2>All Crafts</h2>
+      <h3>All Crafts</h3>
 
       <input
         type="text"
@@ -85,7 +85,7 @@ export default function AllCrafts() {
                 {craft.category}
               </p>
               <p style={{fontSize: "14px", fontFamily: "Arial, sans-serif"}}>{craft.description}</p>
-              <p style={{color: "brown"}}><strong>Price:</strong> ₹{craft.price}</p>
+              <p style={{color: "red", fontSize:"14px"}}><strong>Purchase:</strong> ₹{craft.price}</p>
 
               <div
                 style={{
