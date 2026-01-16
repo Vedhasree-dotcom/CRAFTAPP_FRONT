@@ -6,9 +6,11 @@ import Navbar from './Components/Navbar'
 import Home from './Components/Pages/Home'
 import About from './Components/Pages/About'
 import Crafts from './Components/Pages/Crafts';
+import CraftDetails from './Components/Pages/CraftDetails';
 import AllCrafts from './Components/Pages/AllCrafts'
 import Paper from './Components/Pages/Paper'
 import Homedecor from './Components/Pages/Homedecor'
+import Knitting from './Components/Pages/Knitting'
 import FindCraft from './Components/Pages/FindCraft';
 import Register from './Components/Register'
 import Login from './Components/Login';
@@ -50,10 +52,16 @@ function AppContent() {
           <Route index element={<AllCrafts />} />
           <Route path="paper" element={<Paper/>} />
           <Route path="home-decor" element={<Homedecor />} />
-          {/* <Route path="knitting" element={<Knitting />} />
-          <Route path="painting" element={<Painting />} />
-          <Route path="clay" element={<Clay />} /> */} 
+          <Route path="knitting" element={<Knitting />} />
+          {/* <Route path="painting" element={<Painting />} />
+          <Route path="clay" element={<Clay />} />  */}
         </Route>
+
+        <Route path='/crafts/:id' element={
+          <ProtectedRoute>
+           <CraftDetails /> 
+          </ProtectedRoute>
+        } />
 
          
         <Route path="/findcraft" element={

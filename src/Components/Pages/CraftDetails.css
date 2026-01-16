@@ -1,0 +1,99 @@
+.craft-details-page {
+  margin-top: 100px;
+  padding: 40px;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+}
+
+/* Scope everything inside Craft Details ONLY */
+.craft-details-page .craft-card {
+  background: #ffffff;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  gap: 40px;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Image */
+.craft-details-page .craft-image img {
+  width: 350px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Info */
+.craft-details-page .craft-info {
+  flex: 1;
+}
+
+.craft-details-page .craft-category {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: rgb(180, 113, 32);
+  letter-spacing: 1px;
+}
+
+.craft-details-page .craft-title {
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.craft-details-page .craft-description {
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Price */
+.craft-details-page .craft-price {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* Materials */
+.craft-details-page .craft-materials {
+  background: #fafafa;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.craft-details-page .craft-materials ul {
+  padding-left: 20px;
+}
+
+/* Buttons */
+.craft-details-page .craft-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.craft-details-page .btn-buy {
+  background-color: rgb(180, 113, 32);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.craft-details-page .btn-tutorial {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Loading */
+.craft-details-page .loading {
+  text-align: center;
+  margin-top: 120px;
+  font-size: 18px;
+}

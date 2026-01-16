@@ -14,7 +14,7 @@ function Paper() {
       } catch (error) {
         console.error("Error fetching paper crafts:", error);
       } finally {
-        setLoading(false);
+        setLoading(false);      // Ensure loading is set to false after fetch attempt
       }
     };
 

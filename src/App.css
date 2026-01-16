@@ -326,7 +326,7 @@ body{
 
 }
 
-/* ............................................... */
+/*.............. Crafts page.............. */
 .crafts-container {
   display: flex;
   min-height: 80vh;
@@ -370,8 +370,6 @@ body{
   padding: 20px;
   border-radius: 10px;
 }
-
-
 
 
 /*.............. Findcraft.............. */

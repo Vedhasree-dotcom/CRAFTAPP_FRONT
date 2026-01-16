@@ -26,7 +26,7 @@ export function AuthProvider({children}) {
     const [loading, setLoading] = useState(true);
 
 
-    // Decode token using jwt-decode (super simple & safe )
+    // Decode token using jwt-decode 
     const decodeToken = (token) => {
         try{
             return jwtDecode(token);
