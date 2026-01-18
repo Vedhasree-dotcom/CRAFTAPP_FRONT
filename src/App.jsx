@@ -7,6 +7,7 @@ import Home from './Components/Pages/Home'
 import About from './Components/Pages/About'
 import Crafts from './Components/Pages/Crafts';
 import CraftDetails from './Components/Pages/CraftDetails';
+import TutorialStep from './Components/tutorials/TutorialStep'
 import AllCrafts from './Components/Pages/AllCrafts'
 import Paper from './Components/Pages/Paper'
 import Homedecor from './Components/Pages/Homedecor'
@@ -19,7 +20,6 @@ import ForgotPassword from './Components/ForgotPassword'
 import ResetPassword from './Components/ResetPassword';
 import AdminDashboard from './Components/Admin/AdminDashboard';
 import Footer from './Components/Footer';
-import TutorialStep from './Components/tutorials/TutorialStep'
 import ProtectedRoute from './Components/ProtectedRoute';
 import AdminProtectedRoute from './Components/Admin/AdminProtectedRoute';
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
@@ -62,6 +62,8 @@ function AppContent() {
            <CraftDetails /> 
           </ProtectedRoute>
         } />
+
+       <Route path="/crafts/:id/tutorial" element={<TutorialStep />} />
 
          
         <Route path="/findcraft" element={

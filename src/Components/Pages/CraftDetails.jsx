@@ -17,7 +17,7 @@ function CraftDetails() {
   if (!craft) return <p className="loading">Loading...</p>;
 
   const handleTutorialClick = () => {
-    navigate(`/payment/${craft._id}`);
+    navigate(`/crafts/${craft._id}/tutorial`);               // /payment/${craft._id}
   };
 
   return (
@@ -49,7 +49,7 @@ function CraftDetails() {
           </div>
 
           <div className="craft-actions">
-            <button className="btn-buy">Buy Craft</button>
+            <button className="btn-save">Save craft</button>
             <button className="btn-tutorial" onClick={handleTutorialClick}>
               View Tutorial 🔒
             </button>
