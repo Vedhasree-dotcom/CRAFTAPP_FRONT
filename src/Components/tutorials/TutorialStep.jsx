@@ -70,14 +70,32 @@ export default function TutorialStep() {
       </div>
 
       {craft.tutorialVideo && (
-        <div className="video-section">
-          <h2>Complete Tutorial Video</h2>
-          <video controls>
-            <source src={craft.tutorialVideo} type="video/mp4" />
-            Your browser does not support video.
-          </video>
-        </div>
-      )}
+  <div className="video-section">
+    <h2>Complete Tutorial Video</h2>
+
+    {craft.tutorialVideo.includes("youtube") ||
+    craft.tutorialVideo.includes("youtu.be") ? (
+      <iframe
+        width="100%"
+        height="400"
+        src={craft.tutorialVideo.replace(
+          "youtu.be/",
+          "www.youtube.com/embed/"
+        ).split("?")[0]}
+        title="YouTube tutorial"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    ) : (
+      <video controls width="100%">
+        <source src={craft.tutorialVideo} type="video/mp4" />
+        Your browser does not support video.
+      </video>
+    )}
+  </div>
+)}
+
     </div>
   );
 }
