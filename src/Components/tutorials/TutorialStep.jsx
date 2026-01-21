@@ -23,7 +23,7 @@ export default function TutorialStep() {
     };
 
     fetchCraft();
-  }, [id]);
+  }, [id]);           // Dependency array includes id to refetch if it changes
 
   if (loading) return <p className="loading">Loading tutorial...</p>;
   if (!craft) return <p>Craft not found</p>;
@@ -31,12 +31,12 @@ export default function TutorialStep() {
   return (
     <div className="tutorial-container">
       <div className="tutorial-header">
-        <h1>{craft.title}</h1>
+        <h3>{craft.title}</h3>
         <p>{craft.description}</p>
       </div>
 
       <div className="materials-box">
-        <h3>Materials Required</h3>
+        <h4>Materials Required</h4>
         <ul>
           {craft.materials.map((mat, index) => (
             <li key={index}>{mat}</li>
