@@ -1,7 +1,7 @@
 .tutorial-container {
   max-width: 1200px;
-  margin: auto;
-  padding: 30px;
+  margin: 30px 50px ;
+  padding: 70px;
 }
 
 .loading {
@@ -45,7 +45,7 @@
 
 .step-card {
   display: flex;
-  gap: 30px;
+  gap: 60px;
   margin-bottom: 30px;
   padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
@@ -61,11 +61,12 @@
   font-size: 14px;
 }
 
-.step-text h3 {
+.step-text h5 {
   margin: 8px 0;
 }
 
 .step-text p {
+  font-size: 16px;
   color: #444;
 }
 
@@ -74,7 +75,7 @@
 }
 
 .step-image img {
-  width: 100%;
+  width: 80%;
   border-radius: 8px;
 }
 

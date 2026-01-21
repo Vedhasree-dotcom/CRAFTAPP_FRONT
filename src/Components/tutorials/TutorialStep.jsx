@@ -53,7 +53,7 @@ export default function TutorialStep() {
               <span className="step-number">
                 Step {step.stepNumber}
               </span>
-              <h3>{step.title}</h3>
+              <h5>{step.title}</h5>
               <p>{step.description}</p>
             </div>
 
@@ -71,12 +71,12 @@ export default function TutorialStep() {
 
       {craft.tutorialVideo && (
   <div className="video-section">
-    <h2>Complete Tutorial Video</h2>
+    <h4>Complete Tutorial Video</h4>
 
     {craft.tutorialVideo.includes("youtube") ||
     craft.tutorialVideo.includes("youtu.be") ? (
       <iframe
-        width="100%"
+        width="60%"
         height="400"
         src={craft.tutorialVideo.replace(
           "youtu.be/",
@@ -88,7 +88,7 @@ export default function TutorialStep() {
         allowFullScreen
       ></iframe>
     ) : (
-      <video controls width="100%">
+      <video controls width="80%">
         <source src={craft.tutorialVideo} type="video/mp4" />
         Your browser does not support video.
       </video>
