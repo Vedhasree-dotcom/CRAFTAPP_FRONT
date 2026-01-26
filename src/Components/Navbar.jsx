@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import { useState } from "react";
+import { FaUserCircle, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -21,34 +22,39 @@ const Navbar = () => {
         <div className="nav-right">
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
+          <Link to="/crafts">Crafts</Link>
 
-            <Link to="/crafts">Crafts </Link>
-            
           {user?.role !== "admin" && (
-              <Link to="/findcraft">FindCraft</Link>
-            )}
-            
+            <Link to="/findcraft">FindCraft</Link>
+          )}
+
           {user?.role === "admin" && (
-              <Link to="/admin/dashboard">Dashboard</Link>
-            )}
+            <Link to="/admin/dashboard">Dashboard</Link>
+          )}
+
+          {user && (
+            <Link to="/profile" className="icon-btn">
+              <FaUserCircle size={24} />
+            </Link>
+          )}
 
           {!user ? (
-            <button className="auth-btn">
-              <Link to="/login" style={{ color: "brown" }}>
-                Login
-              </Link>
-            </button>
+            <Link to="/login" className="icon-btn">
+              <FaSignInAlt size={22} title="Login" />
+            </Link>
           ) : (
             <button
-              className="auth-btn logout-btn"
+              className="icon-btn logout-icon"
               onClick={() => setShowPopup(true)}
+              title="Logout"
             >
-              Logout
+              <FaSignOutAlt size={22} />
             </button>
           )}
         </div>
       </nav>
 
+      {/* Logout Confirmation Popup */}
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup-box">

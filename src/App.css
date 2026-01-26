@@ -43,24 +43,25 @@ body{
 
 
 
-.auth-btn {
-  margin-left: 15px;
-  padding: 6px 16px;
+.icon-btn {
+
+  background: none;
   border: none;
-  border-radius: 4px;
-  background-color: peachpuff;
-  font-weight: 500;
   cursor: pointer;
+  color: #e2c6bc;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.logout-btn {
-  background-color: peachpuff;
-  color: darkred;
+.icon-btn:hover {
+  color: #cebbad;
 }
-.logout-btn:hover {
-  background-color: rgb(226, 186, 138);
-  color: white;
+
+.logout-icon {
+  padding: 0;
 }
+
 
 .popup-overlay {
   position: fixed;
