@@ -26,7 +26,6 @@ export function AuthProvider({children}) {
     const [loading, setLoading] = useState(true);
 
 
-    // Decode token using jwt-decode 
     const decodeToken = (token) => {
         try{
             return jwtDecode(token);
@@ -37,8 +36,6 @@ export function AuthProvider({children}) {
     };
 
 
-     // when it changes in header change
-    // if token exists decode it and store it in localstorage
     useEffect(() => {
         setAuthToken(token);
         if(token) {
@@ -53,20 +50,18 @@ export function AuthProvider({children}) {
     }, [token]);
 
     
-    // register function api call 
     const register = async (form) => {
-        return await api.post("/api/auth/register", form);
+        return await api.post("/auth/register", form);
     };
 
-    // login function api call
     const login = async (form) => {
-        const res = await api.post("/api/auth/login", form);
-        setPendingEmail(form.email);   // verifying email for otp sending
+        const res = await api.post("/auth/login", form);
+        setPendingEmail(form.email);  
         return res;
     };
    
     const verifyOTP = async(email, otp) => {
-        const res = await api.post("/api/auth/verify-otp", { email, otp });
+        const res = await api.post("/auth/verify-otp", { email, otp });
         if(res?.data?.accessToken) {
             setToken(res.data.accessToken);  
             localStorage.setItem("token", JSON.stringify(res.data.accessToken));
@@ -75,18 +70,15 @@ export function AuthProvider({children}) {
         return res;
     };
 
-    // forgot password - send OTP / reset link to email
    const forgotPassword = async (email) => {
-     const res = await api.post("/api/auth/forgot-password", { email });
+     const res = await api.post("/auth/forgot-password", { email });
      setPendingEmail(email); 
      return res;
     };
 
 
-    // //logout function
     const logout = () => {
-    // tell backend to clear refresh cookie and stored refresh token
-    api.post("/api/auth/logout").catch(() => {});
+    api.post("/auth/logout").catch(() => {});
     setToken(null);
     setUser(null);
     setPendingEmail(null);

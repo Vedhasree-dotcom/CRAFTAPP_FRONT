@@ -1,20 +1,15 @@
 
 import axios from 'axios';
-// Vite exposes env vars via import.meta.env and 
-// requires the VITE_prefix for client-side vars
 
 const BASE_URL =
   import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
-// Creating an Axios Instance
 const api = axios.create({
-    baseURL: BASE_URL,    //Every API call using this instance will automatically 
-                           // use the base URL defined earlier.
+    baseURL: BASE_URL,   
     headers: {
         "Content-Type": "application/json",
     },
-    withCredentials: true,   // Send/receive httpOnly cookies
-    //  (refresh token)
+    withCredentials: true,   
 
 });
 
@@ -23,28 +18,25 @@ export function setAuthToken(token) {
     else delete api.defaults.headers.common["Authorization"];
 }
 
-// Simple refresh flow: when a 401 is encountered, attempt to call / api/auth/refresh
 let isRefreshing = false;
 let refreshSubscribers = [];
 
 function onRefreshed(token) {
-    refreshSubscribers = [];  // Clear subscribers after notifying
-
+    refreshSubscribers.forEach(cb => cb(token));
+    refreshSubscribers = [];
 }
-// add a subscriber callback to be called after token is refreshed
+
 function addRefreshSubscriber(cb) {  
     refreshSubscribers.push(cb);
 }
 
-// response interceptor to handle 401 errors
 api.interceptors.response.use(
-    res => res,  // If the response is successful, just return it
+    res => res,  
     async err => {
         const originalRequest = err.config;
         if (err.response && err.response.status === 401 && 
             !originalRequest._retry) {
             if (isRefreshing) {
-                // If a refresh is already in progress, queue the request   
                 return new Promise((resolve, reject) => {
                     addRefreshSubscriber((token) => {
                         if(token) {
@@ -59,7 +51,7 @@ api.interceptors.response.use(
             originalRequest._retry = true;
             isRefreshing = true;
             try {
-                const r = await axios.post(`${BASE_URL}/api/auth/refresh`, {}, {
+                const r = await axios.post(`${BASE_URL}/auth/refresh`, {}, {
                     withCredentials: true,
                 });
                 const { accessToken } = r.data;
@@ -70,7 +62,7 @@ api.interceptors.response.use(
                 return api(originalRequest);
             } catch (refreshErr) {
                 isRefreshing = false;
-                onRefreshed(null); // Notify subscribers that refresh failed
+                onRefreshed(null); 
                 return Promise.reject(refreshErr);
             }
         }
