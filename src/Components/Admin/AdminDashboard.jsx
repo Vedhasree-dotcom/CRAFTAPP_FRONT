@@ -1,53 +1,64 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../../Services/api";
+import { useAuth } from "../../Context/AuthContext";
+import "./AdminDashboard.css";
 
 export default function AdminDashboard() {
-  return (
-    <div className="admin-container">
-      <h1 className="admin-title">Admin Dashboard</h1>
+  const [stats, setStats] = useState({
+    users: 0,
+    crafts: 0,
+    pendingSubmissions: 0,
+  });
 
-      {/* Stats Cards */}
-      <div className="stats-grid">
+  const { logout, token } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) return;
+
+    const fetchStats = async () => {
+      try {
+        const res = await api.get("/admin/dashboard-stats");
+        setStats(res.data);
+      } catch (err) {
+        console.error("Failed to load dashboard stats", err);
+      }
+    };
+
+    fetchStats();
+  }, [token]);
+
+  return (
+    <div className="admin-dashboard">
+      <h1>Admin Dashboard</h1>
+
+      <div className="stats-container">
         <div className="stat-card">
           <h3>Total Users</h3>
-          <p>1,240</p>
+          <p className="stat-count">{stats.users}</p>
         </div>
 
         <div className="stat-card">
           <h3>Total Crafts</h3>
-          <p>320</p>
+          <p className="stat-count">{stats.crafts}</p>
         </div>
 
         <div className="stat-card">
-          <h3>Paid Tutorials</h3>
-          <p>180</p>
-        </div>
-
-        <div className="stat-card">
-          <h3>Total Revenue</h3>
-          <p>₹12,500</p>
+          <h3>Pending Submissions</h3>
+          <p className="stat-count">{stats.pendingSubmissions}</p>
         </div>
       </div>
 
-      {/* Admin Actions */}
       <div className="admin-actions">
-        <h2>Quick Actions</h2>
-
-        <div className="action-grid">
-          <button>Manage Crafts</button>
-          <button>Manage Users</button>
-          <button>View Payments</button>
-          <button>Review Submissions</button>
-        </div>
-      </div>
-
-      {/* Recent Activity */}
-      <div className="recent-section">
-        <h2>Recent Activity</h2>
-        <ul>
-          <li>User Anu purchased “Paper Flower Tutorial”</li>
-          <li>New craft submitted by Rahul</li>
-          <li>Admin added new DIY tutorial</li>
-        </ul>
+        <button onClick={() => navigate("/admin/users")}>Manage Users</button>
+        <button onClick={() => navigate("/admin/crafts")}>Manage Crafts</button>
+        <button onClick={() => navigate("/admin/submissions")}>
+          Manage Submissions
+        </button>
+        <button onClick={logout} className="logout-btn">
+          Logout
+        </button>
       </div>
     </div>
   );

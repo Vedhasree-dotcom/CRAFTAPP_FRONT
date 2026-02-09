@@ -1,0 +1,13 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+/* Sidebar space already fixed */
+.admin-content {
+  flex: 1;
+  padding: 24px;
+  margin-left: 220px; /* same width as sidebar */
+  overflow-y: auto;
+}

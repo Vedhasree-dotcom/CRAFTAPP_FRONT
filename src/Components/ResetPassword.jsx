@@ -39,7 +39,7 @@ export default function ResetPassword() {
       await api.post("/api/auth/reset-password", {
         email,
         otp,               
-        newPassword,       // backend expects this key
+        newPassword,       
       });
 
       alert("Password reset successful. Please login.");

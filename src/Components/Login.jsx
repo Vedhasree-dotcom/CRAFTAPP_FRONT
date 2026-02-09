@@ -23,10 +23,14 @@ export default function Login() {
   }, [location]);
 
   useEffect(() => {
-    if (!loading && (token || user)) {
-      navigate("/");
+  if (!loading && token && user) {
+    if (user.role === "admin") {
+      navigate("/admin/dashboard", { replace: true });
+    } else {
+      navigate("/", { replace: true });
     }
-  }, [loading, token, user, navigate]);
+  }
+}, [loading, token, user, navigate]);
 
   const validate = () => {
     const errs = {};
