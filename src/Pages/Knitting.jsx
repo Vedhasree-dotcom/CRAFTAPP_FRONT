@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import api from '../../Services/api';
+import api from "../Services/api"
 
 function Knitting() {
 

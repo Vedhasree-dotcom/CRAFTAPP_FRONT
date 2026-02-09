@@ -3,16 +3,16 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './Components/Navbar'
-import Home from './Components/Pages/Home'
-import About from './Components/Pages/About'
-import Crafts from './Components/Pages/Crafts';
-import CraftDetails from './Components/Pages/CraftDetails';
+import Home from './Pages/Home'
+import About from './Pages/About'
+import Crafts from "./Pages/Crafts";
+import CraftDetails from './Pages/CraftDetails';
 import TutorialStep from './Components/tutorials/TutorialStep'
-import AllCrafts from './Components/Pages/AllCrafts'
-import Paper from './Components/Pages/Paper'
-import Homedecor from './Components/Pages/Homedecor'
-import Knitting from './Components/Pages/Knitting'
-import FindCraft from './Components/Pages/FindCraft';
+import AllCrafts from './Pages/AllCrafts'
+import Paper from './Pages/Paper'
+import Homedecor from './Pages/Homedecor'
+import Knitting from './Pages/Knitting'
+import FindCraft from './Pages/FindCraft';
 import Register from './Components/Register'
 import Login from './Components/Login';
 import VerifyOTP from './Components/VerifyOtp';
@@ -58,7 +58,7 @@ function AppContent() {
           <Route path="knitting" element={<Knitting />} />
           {/* <Route path="painting" element={<Painting />} />
           <Route path="clay" element={<Clay />} />  */}
-          
+
         </Route>
 
         <Route path='/crafts/:id' element={
@@ -84,14 +84,14 @@ function AppContent() {
 
         <Route path="/reset-password" element={<ResetPassword/>} />
 
-        <Route path="/admin/dashboard" element={
+        <Route path="/tutorial" element={<TutorialStep/>} />
+
+       {/* Admin routes */}
+       <Route path="/admin/dashboard" element={
              <AdminProtectedRoute>
                <AdminDashboard />
             </AdminProtectedRoute>
         } />
-
-        <Route path="/tutorial" element={<TutorialStep/>} />
-
       </Routes>
 
       {!shouldHideLayout && <Footer />}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../../Services/api";
+import api from "../Services/api";
 import { Link } from "react-router-dom";
 
 export default function AllCrafts() {

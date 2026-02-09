@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import api from "../../Services/api";   // adjust path if needed
+import api from "../Services/api";
 
 function Paper() {
   const [paperCrafts, setPaperCrafts] = useState([]);
@@ -14,7 +14,7 @@ function Paper() {
       } catch (error) {
         console.error("Error fetching paper crafts:", error);
       } finally {
-        setLoading(false);      // Ensure loading is set to false after fetch attempt
+        setLoading(false);      
       }
     };
 

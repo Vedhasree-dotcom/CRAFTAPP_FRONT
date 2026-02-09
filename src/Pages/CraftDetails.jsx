@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import api from "../../Services/api";
+import api from "../Services/api";
 import "../Pages/CraftDetails.css";
 
 function CraftDetails() {

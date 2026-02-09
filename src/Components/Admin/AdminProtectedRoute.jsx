@@ -6,11 +6,11 @@ export default function AdminProtectedRoute({ children }) {
   const { token, user } = useAuth();
 
   if (!token) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   if (user?.role !== "admin") {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;
