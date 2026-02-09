@@ -37,18 +37,29 @@ export function AuthProvider({children}) {
 
 
     useEffect(() => {
-        setAuthToken(token);
-        if(token) {
-            const decoded = decodeToken(token);
-            const payloadUser = decoded?.user || decoded || null;
-            setUser(payloadUser);
-            localStorage.setItem("user", JSON.stringify(payloadUser));
-        } else {
-            setUser(null);
-            localStorage.removeItem("user");
-        }
-    }, [token]);
+     setAuthToken(token);
 
+    if (token) {
+        const decoded = decodeToken(token);
+
+        // Optional: check token expiry
+        if (decoded?.exp && decoded.exp * 1000 < Date.now()) {
+        logout();
+        setLoading(false);
+        return;
+        }
+
+        const payloadUser = decoded?.user || decoded || null;
+        setUser(payloadUser);
+        localStorage.setItem("user", JSON.stringify(payloadUser));
+    } else {
+        setUser(null);
+        localStorage.removeItem("user");
+    }
+
+    setLoading(false); 
+    }, [token]);
+    
     
     const register = async (form) => {
         return await api.post("/auth/register", form);

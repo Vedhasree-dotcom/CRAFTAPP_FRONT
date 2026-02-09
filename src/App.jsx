@@ -38,9 +38,8 @@ function AppContent() {
 
       <Routes>
         <Route path="/" element={
-          <ProtectedRoute>
           <Home/>
-          </ProtectedRoute>} />
+         } />
 
         <Route path="/about" element={
           <ProtectedRoute>
