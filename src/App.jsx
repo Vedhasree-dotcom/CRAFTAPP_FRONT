@@ -47,13 +47,18 @@ function AppContent() {
           </ProtectedRoute>
         } />
         
-        <Route path="/crafts" element={<Crafts />}>
+        <Route path="/crafts" element={
+          <ProtectedRoute>
+            <Crafts />
+            </ProtectedRoute> 
+          } >
           <Route index element={<AllCrafts />} />
           <Route path="paper" element={<Paper/>} />
           <Route path="home-decor" element={<Homedecor />} />
           <Route path="knitting" element={<Knitting />} />
           {/* <Route path="painting" element={<Painting />} />
           <Route path="clay" element={<Clay />} />  */}
+          
         </Route>
 
         <Route path='/crafts/:id' element={
