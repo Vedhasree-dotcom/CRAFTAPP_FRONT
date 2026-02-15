@@ -11,7 +11,6 @@ export default function ResetPassword() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // email passed from VerifyOTP
   const email = location?.state?.email;
 
   if (!email) {

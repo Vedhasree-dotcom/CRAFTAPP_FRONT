@@ -5,13 +5,8 @@ import {jwtDecode} from "jwt-decode";
 const AuthContext = createContext(null);
 export function AuthProvider({children}) {
     const [token, setToken] = useState(() => {
-        try{
-            return JSON.parse(localStorage.getItem("token"));
-        }
-        catch{
-            return null;
-        }
-    });
+    return localStorage.getItem("token");
+   });
 
     const [user, setUser] = useState(() => {
         try{
@@ -66,7 +61,7 @@ export function AuthProvider({children}) {
         const res = await api.post("/auth/verify-otp", { email, otp });
         if(res?.data?.accessToken) {
             setToken(res.data.accessToken);  
-            localStorage.setItem("token", JSON.stringify(res.data.accessToken));
+            localStorage.setItem("token", res.data.accessToken);
             setPendingEmail(null);
         };
         return res;

@@ -13,10 +13,9 @@ export default function VerifyOTP() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Email and purpose passed via state or AuthContext
   const email = location?.state?.email || pendingEmail;
-  const purpose = location?.state?.purpose || "login"; // "login" or "reset"
-
+  const purpose = location?.state?.purpose || "login";
+  
   const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -34,7 +33,7 @@ export default function VerifyOTP() {
       setVerified(true);
 
     } else {
-      const res = await api.post("/api/auth/verify-reset-otp", {
+      const res = await api.post("/auth/verify-reset-otp", {
         email,
         otp,
       });
@@ -50,7 +49,6 @@ export default function VerifyOTP() {
 };
 
 
-  // Redirect after login OTP verified
   useEffect(() => {
     if (verified && user) {
       if (user.role === "admin") navigate("/admin/dashboard");
@@ -64,7 +62,7 @@ export default function VerifyOTP() {
         placeholder="Enter OTP"
         value={otp}
         maxLength={6}
-        onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))} // digits only
+        onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))} 
       />
       <button type="submit" disabled={loading}>
         {loading ? "Verifying..." : "Verify OTP"}
