@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../Services/api";
 import CraftForm from "./CraftForm";
 
 export default function ManageCrafts() {
@@ -7,26 +7,23 @@ export default function ManageCrafts() {
   const [showForm, setShowForm] = useState(false);
   const [editingCraft, setEditingCraft] = useState(null);
 
-  const token = localStorage.getItem("token");
-
   useEffect(() => {
     fetchCrafts();
   }, []);
 
   const fetchCrafts = async () => {
     try {
-      const res = await axios.get("/api/crafts");
-      setCrafts(Array.isArray(res.data) ? res.data : res.data.crafts);
+      const res = await api.get("/crafts");
+      setCrafts(res.data?.crafts ?? []);
     } catch (err) {
       console.error("Error fetching crafts", err);
+      setCrafts([]);
     }
   };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/api/crafts/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await api.delete(`/crafts/${id}`);
       fetchCrafts();
     } catch (err) {
       console.error("Delete error", err);
