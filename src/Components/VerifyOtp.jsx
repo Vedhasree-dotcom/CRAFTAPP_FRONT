@@ -1,60 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../Context/AuthContext";
 import api from "../Services/api";
-
 
 export default function VerifyOTP() {
   const [otp, setOtp] = useState("");
-  const [verified, setVerified] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { pendingEmail, user, verifyOTP } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const email = location?.state?.email || pendingEmail;
-  const purpose = location?.state?.purpose || "login";
-  
-  const handleSubmit = async (e) => {
-  e.preventDefault();
+  const email = location?.state?.email;
 
-  if (!/^\d{6}$/.test(otp)) {
-    return alert("OTP must be a 6 digit number");
+  if (!email) {
+    return <p>Invalid session. Please try again.</p>;
   }
 
-  try {
-    setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    if (purpose === "login") {
+    if (!/^\d{6}$/.test(otp)) {
+      return alert("OTP must be a 6 digit number");
+    }
 
-      const res = await verifyOTP(email, otp);
-      alert(res.data.message);
-      setVerified(true);
+    try {
+      setLoading(true);
 
-    } else {
       const res = await api.post("/auth/verify-reset-otp", {
         email,
         otp,
       });
 
       alert(res.data.message);
-      navigate("/reset-password", { state: { email, otp } });
-    }
-  } catch (err) {
-    alert(err?.response?.data?.message || "Invalid OTP");
-  } finally {
-    setLoading(false);
-  }
-};
 
+      navigate("/reset-password", { state: { email } });
 
-  useEffect(() => {
-    if (verified && user) {
-      if (user.role === "admin") navigate("/admin/dashboard");
-      else navigate("/");
+    } catch (err) {
+      alert(err?.response?.data?.message || "Invalid or expired OTP");
+    } finally {
+      setLoading(false);
     }
-  }, [verified, user, navigate]);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -62,7 +47,7 @@ export default function VerifyOTP() {
         placeholder="Enter OTP"
         value={otp}
         maxLength={6}
-        onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))} 
+        onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
       />
       <button type="submit" disabled={loading}>
         {loading ? "Verifying..." : "Verify OTP"}

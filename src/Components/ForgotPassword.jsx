@@ -29,12 +29,10 @@ export default function ForgotPassword() {
     try {
       setLoading(true);
 
-      //  AuthContext 
       const res = await forgotPassword(email);
 
       setMessage(res?.data?.message || "Password reset OTP sent to your email");
 
-      // redirect after few seconds
       setTimeout(() => {
         navigate("/verify-otp", {
   state: {
