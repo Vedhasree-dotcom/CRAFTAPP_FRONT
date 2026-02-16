@@ -1,35 +1,40 @@
-import './App.css';
+import "./App.css";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { useAuth } from "./Context/AuthContext";
 
-import Navbar from './Components/Navbar';
-import Footer from './Components/Footer';
+import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
-import Home from './Pages/Home';
-import About from './Pages/About';
+import Home from "./Pages/Home";
+import About from "./Pages/About";
 import Crafts from "./Pages/Crafts";
-import CraftDetails from './Pages/CraftDetails';
-import TutorialStep from './Components/tutorials/TutorialStep';
-import AllCrafts from './Pages/AllCrafts';
-import Paper from './Pages/Paper';
-import Homedecor from './Pages/Homedecor';
-import Knitting from './Pages/Knitting';
-import FindCraft from './Pages/FindCraft';
+import CraftDetails from "./Pages/CraftDetails";
+import TutorialStep from "./Components/tutorials/TutorialStep";
+import AllCrafts from "./Pages/AllCrafts";
+import Paper from "./Pages/Paper";
+import Homedecor from "./Pages/Homedecor";
+import Knitting from "./Pages/Knitting";
+import FindCraft from "./Pages/FindCraft";
 
-import Register from './Components/Register';
-import Login from './Components/Login';
-import VerifyOTP from './Components/VerifyOtp';
-import ForgotPassword from './Components/ForgotPassword';
-import ResetPassword from './Components/ResetPassword';
+import Register from "./Components/Register";
+import Login from "./Components/Login";
+import VerifyOTP from "./Components/VerifyOtp";
+import ForgotPassword from "./Components/ForgotPassword";
+import ResetPassword from "./Components/ResetPassword";
 
-import AdminDashboard from './Components/Admin/AdminDashboard';
-import AdminLayout from './Pages/Layout/AdminLayout';
+import AdminDashboard from "./Components/Admin/AdminDashboard";
+import AdminLayout from "./Pages/Layout/AdminLayout";
+import ManageCrafts from "./Components/Admin/ManageCrafts";
 
-import ProtectedRoute from './Components/ProtectedRoute';
-import AdminProtectedRoute from './Components/Admin/AdminProtectedRoute';
 
-import { Routes, Route, useLocation } from "react-router-dom";
+import ProtectedRoute from "./Components/ProtectedRoute";
+import AdminProtectedRoute from "./Components/Admin/AdminProtectedRoute";
 
 function App() {
   const location = useLocation();
+  const { user, loading } = useAuth();
+
+  if (loading) return null;
 
   const authRoutes = [
     "/login",
@@ -49,7 +54,17 @@ function App() {
       {!shouldHideLayout && <Navbar />}
 
       <Routes>
-        <Route path="/" element={<Home />} />
+
+        <Route
+          path="/"
+          element={
+            user?.role === "admin" ? (
+              <Navigate to="/admin/dashboard" replace />
+            ) : (
+              <Home />
+            )
+          }
+        />
 
         <Route
           path="/about"
@@ -94,14 +109,13 @@ function App() {
           }
         />
 
-        {/* Auth Routes */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verify-otp" element={<VerifyOTP />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
 
-        {/* Admin Routes */}
+
         <Route
           path="/admin"
           element={
@@ -110,13 +124,11 @@ function App() {
             </AdminProtectedRoute>
           }
         >
-          <Route path="dashboard" element={<AdminDashboard />} />
-          {/* 
-          <Route path="users" element={<ManageUsers />} />
-          <Route path="crafts" element={<ManageCrafts />} />
-          <Route path="submissions" element={<ManageSubmissions />} />
-          */}
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="crafts" element={<ManageCrafts />} />
         </Route>
+
       </Routes>
 
       {!shouldHideLayout && <Footer />}
