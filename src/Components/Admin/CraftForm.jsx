@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../../Services/api";
+import "./style.css"
 
 export default function CraftForm({ editingCraft, closeForm, refresh }) {
   const [title, setTitle] = useState(editingCraft?.title || "");
@@ -45,148 +46,189 @@ export default function CraftForm({ editingCraft, closeForm, refresh }) {
 
   // Submit craft form
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("price", price);
-    formData.append("category", category);
-    formData.append("materials", materials);
-    formData.append("tutorialVideo", tutorialVideo);
-    formData.append("tutorialSteps", JSON.stringify(tutorialSteps));
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("price", price);
+  formData.append("category", category);
 
-    if (image) formData.append("image", image);
+  const materialsArray = materials
+    .split(",")
+    .map(item => item.trim())
+    .filter(item => item !== "");
 
-    // Append step images
-    tutorialSteps.forEach((step) => {
-      if (step.imageFile) formData.append("stepImages", step.imageFile);
-    });
+  formData.append("materials", JSON.stringify(materialsArray));
 
-    try {
-      if (editingCraft) {
-        await api.put(`/crafts/${editingCraft._id}`, formData);
-      } else {
-        await api.post("/crafts", formData);
-      }
+  formData.append("tutorialVideo", tutorialVideo);
+  formData.append("tutorialSteps", JSON.stringify(tutorialSteps));
 
-      refresh();
-      closeForm();
-    } catch (error) {
-      console.error("Error saving craft:", error);
-      alert("Error saving craft");
+  if (image) formData.append("image", image);
+
+  tutorialSteps.forEach((step) => {
+    if (step.imageFile) formData.append("stepImages", step.imageFile);
+  });
+
+  try {
+    if (editingCraft) {
+      await api.put(`/crafts/${editingCraft._id}`, formData);
+    } else {
+      await api.post("/crafts", formData);
     }
-  };
+
+    refresh();
+    closeForm();
+  } catch (error) {
+    console.error("Error saving craft:", error);
+    alert("Error saving craft");
+  }
+};
 
   return (
+   <div className="admin-form-wrapper">
     <form onSubmit={handleSubmit} className="craft-form">
-      <h2>{editingCraft ? "Edit Craft" : "Create Craft"}</h2>
+      <h2 className="form-title">
+        {editingCraft ? "Edit Craft" : "Create Craft"}
+      </h2>
 
-      {/* Title */}
-      <input
-        type="text"
-        placeholder="Craft Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
+      <div className="form-group">
+        <label>Craft Title</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </div>
 
-      {/* Description */}
-      <textarea
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        required
-      />
+      <div className="form-group">
+        <label>Description</label>
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+      </div>
 
-      {/* Price */}
-      <input
-        type="number"
-        placeholder="Price"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-        required
-      />
-
-      {/* Category */}
-      <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        required
-      >
-        <option value="">Select Category</option>
-        <option value="paper">Paper</option>
-        <option value="home-decor">Home Decor</option>
-        <option value="painting">Painting</option>
-        <option value="clay">Clay</option>
-        <option value="knitting">Knitting</option>
-      </select>
-
-      {/* Materials */}
-      <input
-        type="text"
-        placeholder="Materials (comma separated)"
-        value={materials}
-        onChange={(e) => setMaterials(e.target.value)}
-        required
-      />
-
-      {/* Tutorial Video */}
-      <input
-        type="text"
-        placeholder="Tutorial Video URL (YouTube)"
-        value={tutorialVideo}
-        onChange={(e) => setTutorialVideo(e.target.value)}
-      />
-
-      {/* Main Craft Image */}
-      <label>Main Craft Image</label>
-      <input
-        type="file"
-        onChange={(e) => setImage(e.target.files[0])}
-        required={!editingCraft}
-      />
-
-      {/* Tutorial Steps */}
-      <h3>Tutorial Steps</h3>
-      {tutorialSteps.map((step, index) => (
-        <div key={index} className="tutorial-step">
+      <div className="form-row">
+        <div className="form-group">
+          <label>Price</label>
           <input
-            type="text"
-            placeholder="Step Title"
-            value={step.title}
-            onChange={(e) => updateStep(index, "title", e.target.value)}
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
             required
           />
-
-          <textarea
-            placeholder="Step Description"
-            value={step.description}
-            onChange={(e) =>
-              updateStep(index, "description", e.target.value)
-            }
-            required
-          />
-
-          <label>Step Image</label>
-          <input
-            type="file"
-            onChange={(e) => updateStep(index, "imageFile", e.target.files[0])}
-          />
-
-          <button type="button" onClick={() => removeStep(index)}>
-            Remove Step
-          </button>
         </div>
-      ))}
 
-      <button type="button" onClick={addStep}>
-        Add Step
-      </button>
+        <div className="form-group">
+          <label>Category</label>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          >
+            <option value="">Select Category</option>
+            <option value="paper">Paper</option>
+            <option value="home-decor">Home Decor</option>
+            <option value="painting">Painting</option>
+            <option value="clay">Clay</option>
+            <option value="knitting">Knitting</option>
+          </select>
+        </div>
+      </div>
 
-      <button type="submit">
+      <div className="form-group">
+        <label>Materials (comma separated)</label>
+        <input
+          type="text"
+          value={materials}
+          onChange={(e) => setMaterials(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Tutorial Video URL</label>
+        <input
+          type="text"
+          value={tutorialVideo}
+          onChange={(e) => setTutorialVideo(e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Main Craft Image</label>
+        <input
+          type="file"
+          onChange={(e) => setImage(e.target.files[0])}
+          required={!editingCraft}
+        />
+      </div>
+
+      <div className="steps-section">
+        <h3>Tutorial Steps</h3>
+
+        {tutorialSteps.map((step, index) => (
+          <div key={index} className="tutorial-step">
+            <div className="form-group">
+              <label>Step Title</label>
+              <input
+                type="text"
+                value={step.title}
+                onChange={(e) =>
+                  updateStep(index, "title", e.target.value)
+                }
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Step Description</label>
+              <textarea
+                value={step.description}
+                onChange={(e) =>
+                  updateStep(index, "description", e.target.value)
+                }
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Step Image</label>
+              <input
+                type="file"
+                onChange={(e) =>
+                  updateStep(index, "imageFile", e.target.files[0])
+                }
+              />
+            </div>
+
+            <button
+              type="button"
+              className="remove-step-btn"
+              onClick={() => removeStep(index)}
+            >
+              Remove Step
+            </button>
+          </div>
+        ))}
+
+        <button
+          type="button"
+          className="add-step-btn"
+          onClick={addStep}
+        >
+          + Add Step
+        </button>
+      </div>
+
+      <button type="submit" className="submit-btn">
         {editingCraft ? "Update Craft" : "Create Craft"}
       </button>
     </form>
+  </div>
+
   );
 }

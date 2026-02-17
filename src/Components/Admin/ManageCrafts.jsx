@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../Services/api";
-import CraftForm from "./CraftForm";
+import "./style.css";
 
 export default function ManageCrafts() {
   const [crafts, setCrafts] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [editingCraft, setEditingCraft] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCrafts();
@@ -14,65 +14,39 @@ export default function ManageCrafts() {
   const fetchCrafts = async () => {
     try {
       const res = await api.get("/crafts");
-      setCrafts(res.data?.crafts ?? []);
+      setCrafts(res.data ?? []);
     } catch (err) {
       console.error("Error fetching crafts", err);
       setCrafts([]);
     }
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await api.delete(`/crafts/${id}`);
-      fetchCrafts();
-    } catch (err) {
-      console.error("Delete error", err);
-    }
-  };
-
-  const handleEdit = (craft) => {
-    setEditingCraft(craft);
-    setShowForm(true);
-  };
-
   return (
     <div className="manage-crafts">
       <div className="top-bar">
         <h2>Manage Crafts</h2>
-        <button
-          onClick={() => {
-            setEditingCraft(null);
-            setShowForm(true);
-          }}
-        >
+
+        <button onClick={() => navigate("/admin/add-craft")}>
           + Add Craft
         </button>
       </div>
-
-      {showForm && (
-        <CraftForm
-          editingCraft={editingCraft}
-          closeForm={() => setShowForm(false)}
-          refresh={fetchCrafts}
-        />
-      )}
 
       <div className="craft-grid">
         {crafts.length === 0 ? (
           <p>No crafts found</p>
         ) : (
           crafts.map((craft) => (
-            <div key={craft._id} className="craft-card">
-              <img src={craft.image} alt={craft.title} />
+            <div
+              key={craft._id}
+              className="craft-card"
+              onClick={() => navigate(`/admin/crafts/${craft._id}`)}
+            >
+              <img
+                src={`http://localhost:5000${craft.image}`}
+                alt={craft.title}
+              />
               <h3>{craft.title}</h3>
               <p>{craft.category}</p>
-
-              <div className="actions">
-                <button onClick={() => handleEdit(craft)}>Edit</button>
-                <button onClick={() => handleDelete(craft._id)}>
-                  Delete
-                </button>
-              </div>
             </div>
           ))
         )}
