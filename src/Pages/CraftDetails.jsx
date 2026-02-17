@@ -25,7 +25,9 @@ function CraftDetails() {
       <div className="craft-card">
 
         <div className="craft-image">
-          <img src={craft.image} alt={craft.title} />
+          <img   
+          src={`${import.meta.env.VITE_SERVER_URL}${craft.image}` || "https://via.placeholder.com/150x350"}
+          alt={craft.title} />
         </div>
 
         <div className="craft-info">

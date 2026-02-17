@@ -69,7 +69,7 @@ export default function AllCrafts() {
               }}
             >
               <img
-                src={craft.image || "https://via.placeholder.com/150x350"}
+                src={`${import.meta.env.VITE_SERVER_URL}${craft.image}` || "https://via.placeholder.com/150x350"}
                 alt={craft.title}
                 style={{
                   width: "100%",

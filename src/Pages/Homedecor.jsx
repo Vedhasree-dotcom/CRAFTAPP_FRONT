@@ -13,7 +13,7 @@ function Homedecor() {
     const fetchDecorCrafts = async () => {
       try {
         const res = await api.get("/crafts/category/home-decor");
-        setDecorCrafts(res.data);    // Set the fetched data to state
+        setDecorCrafts(res.data);    
       }
       catch (error) {
         console.log("Error fetching home decor crafts", error);
@@ -50,7 +50,7 @@ function Homedecor() {
               }}
             >
               <img
-                src={craft.image}
+                src={`${import.meta.env.VITE_SERVER_URL}${craft.image}` || "https://via.placeholder.com/150x350"}
                 alt={craft.title}
                 style={{
                   width: "100%",

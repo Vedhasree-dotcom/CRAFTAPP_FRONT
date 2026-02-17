@@ -456,175 +456,165 @@
 
 /* ........Craft Details........... */
 .admin-craft-details {
-  padding: 40px;
-  background: #f4f6f9;
-  min-height: 100vh;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px 25px;
+  background-color: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .back-btn {
-  background: none;
+  background-color: #6c757d;
+  color: #fff;
   border: none;
-  font-size: 16px;
-  font-weight: 600;
-  color: #4e73df;
+  padding: 6px 12px;
+  border-radius: 5px;
   cursor: pointer;
   margin-bottom: 20px;
-  transition: 0.2s ease;
+  transition: 0.3s;
 }
-
 .back-btn:hover {
-  color: #2e59d9;
-  transform: translateX(-3px);
+  background-color: #5a6268;
 }
 
-.admin-craft-details h1 {
-  font-size: 32px;
-  margin-bottom: 25px;
-  color: #2c3e50;
+.craft-title {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 18px;
+  color: #212529;
+  font-weight: 600;
 }
 
 .main-image {
+  display: block;
   width: 100%;
-  max-width: 600px;
-  height: 350px;
-  object-fit: cover; 
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  margin-bottom: 30px;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #dee2e6;
 }
 
 .details-box {
-  background: white;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-  margin-bottom: 40px;
+  background-color: #f8f9fa;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .details-box p {
-  margin-bottom: 12px;
+  margin: 6px 0;
   font-size: 15px;
-  color: #555;
+  color: #495057;
 }
-
-.details-box strong {
-  color: #2c3e50;
-}
-
 
 .video-section {
-  margin: 40px 0;
+  text-align: center;
+  margin-bottom: 25px;
 }
 
-.video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-  overflow: hidden;
-  border-radius: 12px;
+.video-section h4 {
+  margin-bottom: 10px;
+  color: #212529;
 }
 
-.video-wrapper iframe {
-  position: absolute;
+.video-section iframe,
+.video-section video {
   width: 100%;
-  height: 100%;
-  border: none;
+  max-width: 600px;
+  height: 300px;
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
 }
 
-.admin-craft-details h2 {
-  margin-bottom: 20px;
-  color: #2c3e50;
+.tutorial-steps-title {
+  margin-top: 25px;
+  margin-bottom: 15px;
+  color: #212529;
 }
 
 .step-card {
-  background: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
-  transition: 0.3s ease;
-}
-
-.step-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  background-color: #f8f9fa;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .step-card h4 {
-  margin-bottom: 10px;
-  color: #4e73df;
+  margin-bottom: 6px;
+  color: #343a40;
+  font-size: 16px;
 }
 
 .step-card p {
-  margin-bottom: 15px;
-  color: #555;
+  margin-bottom: 6px;
+  color: #495057;
+  font-size: 14px;
 }
 
-.step-card img {
+.step-image {
+  display: block;
   width: 100%;
-  max-width: 500px;
-  height: 250px;
-  object-fit: cover; 
-  border-radius: 10px;
-  margin-top: 10px;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 6px;
+  border: 1px solid #dee2e6;
 }
 
 .action-buttons {
-  margin-top: 30px;
   display: flex;
-  gap: 15px;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: center;
 }
 
-.action-buttons button {
-  padding: 12px 20px;
+.edit-btn,
+.delete-btn {
+  padding: 8px 16px;
   border: none;
-  border-radius: 10px;
-  font-weight: 600;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s ease;
-  background: #4e73df;
-  color: white;
-  box-shadow: 0 6px 15px rgba(78, 115, 223, 0.25);
+  font-weight: 500;
+  transition: 0.3s;
 }
 
-.action-buttons button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(78, 115, 223, 0.35);
+.edit-btn {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #0b5ed7;
 }
 
 .delete-btn {
-  background: #e74a3b !important;
-  box-shadow: 0 6px 15px rgba(231, 74, 59, 0.25);
+  background-color: #dc3545;
+  color: white;
 }
 
 .delete-btn:hover {
-  box-shadow: 0 10px 25px rgba(231, 74, 59, 0.35);
+  background-color: #bb2d3b;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .admin-craft-details {
-    padding: 20px;
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .main-image, .step-image, iframe, video {
+    width: 100%;
+    max-height: 220px;
   }
 
-  .admin-craft-details h1 {
-    font-size: 24px;
-  }
-
-  .main-image {
-    height: 250px;
-  }
-
-  .step-card img {
-    height: 180px;
+  .video-section iframe,
+  .video-section video {
+    height: 220px;
   }
 
   .action-buttons {
     flex-direction: column;
-  }
-
-  .action-buttons button {
-    width: 100%;
+    gap: 10px;
   }
 }

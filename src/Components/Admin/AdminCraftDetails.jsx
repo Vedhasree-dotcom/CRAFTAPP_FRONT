@@ -38,7 +38,7 @@ export default function AdminCraftDetails() {
         ← Back
       </button>
 
-      <h1>{craft.title}</h1>
+      <h1 className="craft-title">{craft.title}</h1>
 
       <img
         src={`http://localhost:5000${craft.image}`}
@@ -51,34 +51,47 @@ export default function AdminCraftDetails() {
         <p><strong>Price:</strong> ₹{craft.price}</p>
         <p><strong>Description:</strong> {craft.description}</p>
         <p><strong>Materials:</strong> {craft.materials?.join(", ")}</p>
-
-       {craft.tutorialvideo && (
-            <iframe
-                width="100%"
-                height="400"
-                src={`https://www.youtube.com/embed/${craft.tutorialvideo}`}
-                title="YouTube video"
-                frameBorder="0"
-                allowFullScreen
-            ></iframe>
-        )}
-
-
-
       </div>
 
-      <h2>Tutorial Steps</h2>
+      {craft.tutorialVideo && (
+        <div className="video-section">
+          <h4>Complete Tutorial Video</h4>
 
+          {craft.tutorialVideo.includes("youtube") ||
+          craft.tutorialVideo.includes("youtu.be") ? (
+            <iframe
+              width="80%"
+              height="400"
+              src={craft.tutorialVideo
+                .replace("youtu.be/", "www.youtube.com/embed/")
+                .split("?")[0]}
+              title="YouTube tutorial"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <video controls width="80%">
+              <source src={craft.tutorialVideo} type="video/mp4" />
+              Your browser does not support video.
+            </video>
+          )}
+        </div>
+      )}
+
+      <h2 className="tutorial-steps-title">Tutorial Steps</h2>
       {craft.tutorialSteps?.length > 0 ? (
         craft.tutorialSteps.map((step) => (
           <div key={step.stepNumber} className="step-card">
-            <h4>Step {step.stepNumber}: {step.title}</h4>
+            <h4>
+              Step {step.stepNumber}: {step.title}
+            </h4>
             <p>{step.description}</p>
-
             {step.image && (
               <img
                 src={`http://localhost:5000${step.image}`}
                 alt={step.title}
+                className="step-image"
               />
             )}
           </div>
@@ -88,7 +101,7 @@ export default function AdminCraftDetails() {
       )}
 
       <div className="action-buttons">
-        <button onClick={() => navigate(`/admin/edit-craft/${id}`)}>
+        <button className="edit-btn" onClick={() => navigate(`/admin/edit-craft/${id}`)}>
           Edit
         </button>
         <button className="delete-btn" onClick={handleDelete}>

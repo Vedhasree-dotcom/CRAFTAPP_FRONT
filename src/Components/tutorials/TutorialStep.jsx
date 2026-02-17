@@ -60,7 +60,7 @@ export default function TutorialStep() {
             <div className="step-image">
               {step.image && (
                 <img
-                  src={step.image}
+                  src={`${import.meta.env.VITE_SERVER_URL}${step.image}` || "https://via.placeholder.com/150x350"}
                   alt={step.title}
                 />
               )}
