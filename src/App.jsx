@@ -10,12 +10,14 @@ import About from "./Pages/About";
 import Crafts from "./Pages/Crafts";
 import CraftDetails from "./Pages/CraftDetails";
 import TutorialStep from "./Components/tutorials/TutorialStep";
+import SubmitProject from "./Pages/SubmitProject";
+import ProjectPage from "./Pages/ProjectPage";
 import AllCrafts from "./Pages/AllCrafts";
 import Paper from "./Pages/Paper";
 import Homedecor from "./Pages/Homedecor";
 import Knitting from "./Pages/Knitting";
 import FindCraft from "./Pages/FindCraft";
-
+import Profile from "./Pages/Profile";
 import Register from "./Components/Register";
 import Login from "./Components/Login";
 import VerifyOTP from "./Components/VerifyOtp";
@@ -101,6 +103,8 @@ function App() {
         />
 
         <Route path="/crafts/:id/tutorial" element={<TutorialStep />} />
+        <Route path="/submit-project" element={<SubmitProject />} />
+        <Route path="community-projects" element={<ProjectPage/>} />
 
         <Route
           path="/findcraft"
@@ -110,6 +114,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route path="/profile" element={<Profile/>} />
 
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

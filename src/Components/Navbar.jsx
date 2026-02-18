@@ -31,6 +31,8 @@ const Navbar = () => {
           {user?.role === "admin" && (
             <Link to="/admin/dashboard">Dashboard</Link>
           )}
+          
+          <Link to="/community-projects">Community</Link>
 
           {user && (
             <Link to="/profile" className="icon-btn">
@@ -54,7 +56,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Logout Confirmation Popup */}
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup-box">

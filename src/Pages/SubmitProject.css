@@ -1,0 +1,52 @@
+.submit-container {
+  display: flex;
+  justify-content: center;
+  padding: 50px 20px;
+}
+
+.submit-form {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.submit-form h2 {
+  text-align: center;
+  color: chocolate;
+}
+
+.submit-form textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  min-height: 100px;
+}
+
+.submit-form input {
+  padding: 8px;
+}
+
+.submit-form button {
+  padding: 10px;
+  border: none;
+  background-color: chocolate;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-form button:disabled {
+  background-color: gray;
+}
+
+.submit-message {
+  padding: 10px;
+  background: #e6ffe6;
+  border-radius: 5px;
+  text-align: center;
+}

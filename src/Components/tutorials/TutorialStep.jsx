@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "../tutorials/Tutorial.css";
 
 export default function TutorialStep() {
   const { id } = useParams();
   const [craft, setCraft] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchCraft = async () => {
@@ -23,7 +25,7 @@ export default function TutorialStep() {
     };
 
     fetchCraft();
-  }, [id]);           // Dependency array includes id to refetch if it changes
+  }, [id]);         
 
   if (loading) return <p className="loading">Loading tutorial...</p>;
   if (!craft) return <p>Craft not found</p>;
@@ -96,6 +98,14 @@ export default function TutorialStep() {
   </div>
 )}
 
-    </div>
+  <button
+    className="btn-try"
+    onClick={() =>
+      navigate("/submit-project", { state: { craftId: craft._id } })
+    }>
+    I Tried This Craft ✨
+  </button>
+
+  </div>
   );
 }
