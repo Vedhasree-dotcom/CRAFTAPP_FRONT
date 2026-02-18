@@ -2,11 +2,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../Services/api";
 import "../Pages/CraftDetails.css";
+import { toggleSaveCraft } from "../Services/projectService";
+
 
 function CraftDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [craft, setCraft] = useState(null);
+  
 
   useEffect(() => {
     api.get(`/crafts/${id}`)
@@ -19,6 +22,16 @@ function CraftDetails() {
   const handleTutorialClick = () => {
     navigate(`/crafts/${craft._id}/tutorial`);               // /payment/${craft._id}
   };
+
+  const handleSave = async () => {
+  try {
+    await toggleSaveCraft(craft._id);
+    alert("Craft saved successfully ❤️");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 
   return (
     <div className="craft-details-page">
@@ -51,10 +64,12 @@ function CraftDetails() {
           </div>
 
           <div className="craft-actions">
-            <button className="btn-save">Save craft</button>
-            <button className="btn-tutorial" onClick={handleTutorialClick}>
-              View Tutorial 🔒
-            </button>
+              <button className="btn-save" onClick={handleSave}>
+                Save craft ❤️
+              </button>
+              <button className="btn-tutorial" onClick={handleTutorialClick}>
+                View Tutorial 🔒
+              </button>
           </div>
         </div>
 
