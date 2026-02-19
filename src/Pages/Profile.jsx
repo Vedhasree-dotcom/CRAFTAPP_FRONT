@@ -62,7 +62,7 @@ function Profile() {
           </div>
 
           <div className="profile-actions">
-            <button className="btn btn-primary">Follow</button>
+            {/* <button className="btn btn-primary">Follow</button> */}
             <button className="btn btn-secondary">Get in touch</button>
           </div>
         </div>
@@ -119,7 +119,6 @@ function Profile() {
           </div>
         )}
 
-        {/* ── Submissions ── */}
         {activeTab === "submissions" && (
           <div className="craft-grid">
             {submissions.length === 0 && (
@@ -144,14 +143,14 @@ function Profile() {
           </div>
         )}
 
-        {/* ── About ── */}
         {activeTab === "about" && (
           <div className="about-panel">
             <div className="about-card">
               <h3>Bio</h3>
               <div className="about-row">
                 <span className="about-icon">📧</span>
-                <span>{userData.email}</span>
+                <span>{userData.email}</span><br/>
+                <span>📞 {userData.phone}</span>
               </div>
             </div>
           </div>
