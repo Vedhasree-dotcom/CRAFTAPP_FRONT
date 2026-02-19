@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../Services/api";
 
 function Profile() {
@@ -23,134 +24,209 @@ function Profile() {
     }
   };
 
-  if (loading) return <p className="loading-text">Loading profile...</p>;
-  if (!userData) return <p>User not found</p>;
+  if (loading) return (
+    <div className="pf-loading">
+      <div className="pf-spinner" />
+      <p>Loading your profile...</p>
+    </div>
+  );
+
+  if (!userData) return (
+    <div className="pf-loading"><p>User not found.</p></div>
+  );
 
   const tabConfig = [
-    { key: "saved",       label: "Saved Crafts"    },
-    { key: "submissions", label: "Your Submissions" },
-    { key: "about",       label: "About"            },
+    { key: "saved",       label: "Saved Crafts",     icon: "❋" },
+    { key: "submissions", label: "Submissions",       icon: "◈" },
+    { key: "about",       label: "About",             icon: "◎" },
   ];
 
-  return (
-    <div className="profile-root">
+  const totalLikes = submissions.reduce((acc, s) => acc + (s.likes?.length || 0), 0);
 
-      <div className="profile-banner">
-        <div className="banner-blur-orb one" />
-        <div className="banner-blur-orb two" />
-        <div className="banner-blur-orb three" />
+  return (
+    <div className="pf-page">
+
+      <div className="pf-banner">
+        <div className="pf-banner-orb pf-orb-1" />
+        <div className="pf-banner-orb pf-orb-2" />
+        <div className="pf-banner-orb pf-orb-3" />
       </div>
 
-      <div className="profile-body">
+      <div className="pf-header">
 
-        <div className="profile-meta-row">
-          <div className="profile-left">
-
-            <div className="profile-avatar-wrap">
-              <div className="profile-avatar">
-                {userData.name[0].toUpperCase()}
-              </div>
-              <div className="avatar-online" />
-            </div>
-
-            <div className="profile-name-block">
-              <div className="profile-name">
-                {userData.name}
-              </div>
-              <div className="profile-bio">Aspiring craft creator</div>
-            </div>
+        <div className="pf-avatar-wrap">
+          <div className="pf-avatar">
+            {userData.name[0].toUpperCase()}
           </div>
-
-          <div className="profile-actions">
-            {/* <button className="btn btn-primary">Follow</button> */}
-            <button className="btn btn-secondary">Get in touch</button>
-          </div>
+          <div className="pf-avatar-ring" />
         </div>
 
-        <div className="profile-stats">
-          <div className="stat-item">
-            <div className="stat-value">{userData.savedCrafts.length}</div>
-            <div className="stat-label">Saved</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">{submissions.length}</div>
-            <div className="stat-label">Submissions</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">
-              {submissions.reduce((acc, s) => acc + (s.likes?.length || 0), 0)}
-            </div>
-            <div className="stat-label">Likes</div>
-          </div>
+        <div className="pf-identity">
+          <span className="pf-eyebrow">CraftMate Creator</span>
+          <h1 className="pf-name">{userData.name}</h1>
+          <p className="pf-bio">Aspiring craft creator &amp; DIY enthusiast</p>
         </div>
 
-        <div className="profile-tabs">
-          {tabConfig.map((t) => (
-            <button
-              key={t.key}
-              className={`tab-btn ${activeTab === t.key ? "active" : ""}`}
-              onClick={() => setActiveTab(t.key)}
-            >
-              {t.label}
-            </button>
-          ))}
+        <div className="pf-header-actions">
+          <button className="pf-btn-contact">Get in touch</button>
         </div>
+
+      </div>
+
+      <div className="pf-stats">
+        <div className="pf-stat">
+          <span className="pf-stat-num">{userData.savedCrafts.length}</span>
+          <span className="pf-stat-label">Saved</span>
+        </div>
+        <div className="pf-stat-divider" />
+        <div className="pf-stat">
+          <span className="pf-stat-num">{submissions.length}</span>
+          <span className="pf-stat-label">Submissions</span>
+        </div>
+        <div className="pf-stat-divider" />
+        <div className="pf-stat">
+          <span className="pf-stat-num">{totalLikes}</span>
+          <span className="pf-stat-label">Likes</span>
+        </div>
+      </div>
+
+      <div className="pf-tabs">
+        {tabConfig.map((t) => (
+          <button
+            key={t.key}
+            className={`pf-tab ${activeTab === t.key ? "pf-tab--active" : ""}`}
+            onClick={() => setActiveTab(t.key)}
+          >
+            <span className="pf-tab-icon">{t.icon}</span>
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="pf-content">
 
         {activeTab === "saved" && (
-          <div className="craft-grid">
-            {userData.savedCrafts.length === 0 && (
-              <div className="placeholder-card">
-                <div className="icon">🧺</div>
-                <p>No saved crafts yet.</p>
+          <>
+            {userData.savedCrafts.length === 0 ? (
+              <div className="pf-empty">
+                <span className="pf-empty-icon">🧺</span>
+                <h3>No saved crafts yet</h3>
+                <p>Start exploring and save crafts you love.</p>
+                <Link to="/crafts" className="pf-empty-btn">Explore Crafts</Link>
+              </div>
+            ) : (
+              <div className="pf-grid">
+                {userData.savedCrafts.map((craft, i) => (
+                  <Link
+                    to={`/crafts/${craft._id}`}
+                    key={craft._id}
+                    className={`pf-pin ${i % 4 === 0 ? 'pf-pin--tall' : ''}`}
+                  >
+                    <button className="pf-save-btn" onClick={e => e.preventDefault()}>Saved ❤️</button>
+                    <img
+                      src={`${import.meta.env.VITE_SERVER_URL}${craft.image}`}
+                      alt={craft.title}
+                      className="pf-pin-img"
+                    />
+                    <div className="pf-pin-body">
+                      <h4>{craft.title}</h4>
+                      <div className="pf-pin-footer">
+                        <span className="pf-price">₹{craft.price}</span>
+                        <span className="pf-arrow">↗</span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
               </div>
             )}
-            {userData.savedCrafts.map((craft) => (
-              <div className="craft-card" key={craft._id}>
-                <img
-                  src={`${import.meta.env.VITE_SERVER_URL}${craft.image}`}
-                  alt={craft.title}
-                />
-                <div className="card-overlay">
-                  <h4>{craft.title}</h4>
-                  <span>₹ {craft.price}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+          </>
         )}
 
         {activeTab === "submissions" && (
-          <div className="craft-grid">
-            {submissions.length === 0 && (
-              <div className="placeholder-card">
-                <div className="icon">📤</div>
-                <p>No submissions yet.</p>
+          <>
+            {submissions.length === 0 ? (
+              <div className="pf-empty">
+                <span className="pf-empty-icon">📤</span>
+                <h3>No submissions yet</h3>
+                <p>Try a craft and share your creation with the community.</p>
+                <Link to="/crafts" className="pf-empty-btn">Browse Crafts</Link>
+              </div>
+            ) : (
+              <div className="pf-grid">
+                {submissions.map((sub, i) => (
+                  <div
+                    key={sub._id}
+                    className={`pf-pin pf-pin--sub ${i % 5 === 0 ? 'pf-pin--tall' : ''}`}
+                  >
+                    <img
+                      src={`${import.meta.env.VITE_SERVER_URL}${sub.images[0]}`}
+                      alt="submission"
+                      className="pf-pin-img"
+                    />
+                    <div className={`pf-status-badge pf-status--${sub.status}`}>
+                      {sub.status}
+                    </div>
+                    <div className="pf-pin-body">
+                      <h4>{sub.craftId?.title || "Untitled Craft"}</h4>
+                      <p className="pf-sub-desc">{sub.description}</p>
+                      <div className="pf-pin-footer">
+                        <span className="pf-likes">♥ {sub.likes?.length || 0} likes</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
-            {submissions.map((sub) => (
-              <div className="craft-card" key={sub._id}>
-                <img
-                  src={`${import.meta.env.VITE_SERVER_URL}${sub.images[0]}`}
-                  alt="submission"
-                />
-                <div className="card-overlay">
-                  <p>Craft: {sub.craftId?.title || "Unknown"} | Likes: {sub.likes?.length || 0}</p>
-                  <p>{sub.description}</p>
-                  <span className={`status ${sub.status}`}>{sub.status}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+          </>
         )}
 
         {activeTab === "about" && (
-          <div className="about-panel">
-            <div className="about-card">
-              <h3>Bio</h3>
-              <div className="about-row">
-                <span className="about-icon">📧</span>
-                <span>{userData.email}</span><br/>
-                <span>📞 {userData.phone}</span>
+          <div className="pf-about">
+            <div className="pf-about-card">
+              <span className="pf-about-eyebrow">Profile Info</span>
+              <h3>About <em>{userData.name}</em></h3>
+              <div className="pf-about-rows">
+                <div className="pf-about-row">
+                  <div className="pf-about-icon">◎</div>
+                  <div>
+                    <p className="pf-about-row-label">Full Name</p>
+                    <p className="pf-about-row-value">{userData.name}</p>
+                  </div>
+                </div>
+                <div className="pf-about-row">
+                  <div className="pf-about-icon">✉</div>
+                  <div>
+                    <p className="pf-about-row-label">Email</p>
+                    <p className="pf-about-row-value">{userData.email}</p>
+                  </div>
+                </div>
+                {userData.phone && (
+                  <div className="pf-about-row">
+                    <div className="pf-about-icon">◈</div>
+                    <div>
+                      <p className="pf-about-row-label">Phone</p>
+                      <p className="pf-about-row-value">{userData.phone}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="pf-about-stats">
+              <span className="pf-about-eyebrow">Activity</span>
+              <div className="pf-about-stat-grid">
+                <div className="pf-about-stat">
+                  <span>{userData.savedCrafts.length}</span>
+                  <p>Crafts Saved</p>
+                </div>
+                <div className="pf-about-stat">
+                  <span>{submissions.length}</span>
+                  <p>Projects Shared</p>
+                </div>
+                <div className="pf-about-stat">
+                  <span>{totalLikes}</span>
+                  <p>Total Likes</p>
+                </div>
               </div>
             </div>
           </div>
