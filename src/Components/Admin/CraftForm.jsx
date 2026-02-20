@@ -18,7 +18,6 @@ export default function CraftForm({ editingCraft, closeForm, refresh }) {
   );
   const [image, setImage] = useState(null);
 
-  // Add a new tutorial step
   const addStep = () => {
     setTutorialSteps([
       ...tutorialSteps,
@@ -31,20 +30,17 @@ export default function CraftForm({ editingCraft, closeForm, refresh }) {
     ]);
   };
 
-  // Update a field in a step
   const updateStep = (index, field, value) => {
     const updatedSteps = [...tutorialSteps];
     updatedSteps[index][field] = value;
     setTutorialSteps(updatedSteps);
   };
 
-  // Remove a step
   const removeStep = (index) => {
     const updatedSteps = tutorialSteps.filter((_, i) => i !== index);
     setTutorialSteps(updatedSteps);
   };
 
-  // Submit craft form
   const handleSubmit = async (e) => {
   e.preventDefault();
 
