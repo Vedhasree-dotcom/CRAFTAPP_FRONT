@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../Services/api";
-import "./style.css"
+import "./style.css";
 
 export default function ManageSubmissions() {
   const [submissions, setSubmissions] = useState([]);
@@ -51,13 +51,26 @@ export default function ManageSubmissions() {
         <div className="submission-grid">
           {submissions.map((sub) => (
             <div className="submission-card" key={sub._id}>
+              
               <img
                 src={`http://localhost:5000${sub.images[0]}`}
                 alt="submission"
+                className="submission-image"
               />
 
               <div className="submission-info">
-                <p>{sub.description}</p>
+
+                <h3 className="craft-title">
+                  {sub.craftId?.title || "Craft"}
+                </h3>
+
+                <p className="submission-user">
+                  Submitted by <strong>{sub.userId?.name || "User"}</strong>
+                </p>
+
+                <p className="submission-description">
+                  {sub.description}
+                </p>
 
                 <div className="submission-actions">
                   <button
@@ -74,6 +87,7 @@ export default function ManageSubmissions() {
                     Reject
                   </button>
                 </div>
+
               </div>
             </div>
           ))}

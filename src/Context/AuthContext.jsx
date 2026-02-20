@@ -48,16 +48,19 @@ export function AuthProvider({ children }) {
     return await api.post("/auth/register", form);
   };
 
-  const login = async (form) => {
-    const res = await api.post("/auth/login", form);
+ const login = async (form) => {
+  const res = await api.post("/auth/login", form);
 
-    if (res?.data?.accessToken) {
-      setToken(res.data.accessToken);
-      localStorage.setItem("token", res.data.accessToken);
-    }
+  if (res?.data?.accessToken) {
+    const newToken = res.data.accessToken;
 
-    return res;
-  };
+    setAuthToken(newToken);   // important
+    setToken(newToken);
+    localStorage.setItem("token", newToken);
+  }
+
+  return res;
+};
 
   const forgotPassword = async (email) => {
     return await api.post("/auth/forgot-password", { email });

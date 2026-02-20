@@ -11,23 +11,23 @@ export default function AdminDashboard() {
     pendingSubmissions: 0,
   });
 
-  const { logout, token } = useAuth();
-  const navigate = useNavigate();
+const { logout, token, loading } = useAuth();
+const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) return;
+  if (loading || !token) return;
 
-    const fetchStats = async () => {
-      try {
-        const res = await api.get("/admin/dashboard-stats");
-        setStats(res.data);
-      } catch (err) {
-        console.error("Failed to load dashboard stats", err);
-      }
-    };
+  const fetchStats = async () => {
+    try {
+      const res = await api.get("/admin/dashboard-stats");
+      setStats(res.data);
+    } catch (err) {
+      console.error("Failed to load dashboard stats", err);
+    }
+  };
 
-    fetchStats();
-  }, [token]);
+  fetchStats();
+}, [token, loading]);
 
   return (
     <div className="admin-dashboard">
