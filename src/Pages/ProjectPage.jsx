@@ -3,6 +3,7 @@ import { getAllProjects, toggleLike } from "../Services/projectService";
 
 function ProjectPage() {
   const [projects, setProjects] = useState([]);
+  const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
   useEffect(() => {
     fetchProjects();
@@ -26,7 +27,7 @@ function ProjectPage() {
         {projects.map((project) => (
           <div className="project-card" key={project._id}>
             <img
-              src={project.images[0]}
+              src={`${SERVER_URL.replace(/\/$/, "")}${project.images?.[0]}`}
               alt="craft"
               className="project-image"
             />
