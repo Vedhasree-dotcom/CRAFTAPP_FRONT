@@ -1,128 +1,149 @@
-import React, {useEffect, useState } from "react"
-import {Link, useNavigate} from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./Register.css";
 
-
 export default function Register() {
-    const [form, setForm] = useState({name: "", email: "", password: "", phone: "" });
-    const [submitted, setSubmitted] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
-    const {register, user, token, loading} = useAuth();
-    const navigate = useNavigate();
+  const [form, setForm] = useState({ name: "", email: "", password: "", phone: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const { register, user, token, loading } = useAuth();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        if(!loading && (token || user)) {
-             navigate("/login")
-        }
-    }, [loading, token, user, navigate]);
+  useEffect(() => {
+    if (!loading && (token || user)) navigate("/");
+  }, [loading, token, user, navigate]);
 
+  const validate = () => {
+    const errs = {};
+    if (!form.name) errs.name = "Name is required";
+    if (!form.email) errs.email = "Email is required";
+    else if (!form.email.includes("@")) errs.email = "Invalid email";
+    if (!form.password) errs.password = "Password is required";
+    else if (form.password.length < 6) errs.password = "Password must be at least 6 characters";
+    return errs;
+  };
 
-    useEffect(() => {
-        if (!loading && (token || user)) {
-          navigate("/");
-        }
-      }, [loading, token, user, navigate]);
-    
-      const validate = () => {
-        const errs = {};
-        if (!form.email) errs.email = "Email is required";
-        else if (!form.email.includes("@")) errs.email = "Invalid email";
-    
-        if (!form.password) errs.password = "Password is required";
-        else if (form.password.length < 6)
-          errs.password = "Password must be at least 6 characters";
-    
-        return errs;
-      };
-      
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setSubmitted(true); 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    const errs = validate();
+    if (Object.keys(errs).length) return;
+    try {
+      const res = await register(form);
+      alert(res.data.message);
+    } catch (err) {
+      alert(err?.response?.data?.message || err.message);
+    }
+  };
 
-        try{
-        const res = await register(form);
-        alert(res.data.message);
-        }
-        catch (err) {
-            alert(err?.response?.data?.message || err.message);
-        }
-    };
+  const errs = validate();
 
-     return(
-        <div className="register">
-            <form onSubmit={handleSubmit} className="form d-flex flex-column gap-2 ">
-                <h3 className="text-center">Create an Account</h3>
-                <input 
-                className="form-control"
-                name="name"
-                placeholder="Name"
-                onChange={(e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.
-                value }))}
-                />
+  return (
+    <div className="rg-page" style={{ minHeight: "100vh", background: "#f5f0eb" }}>
 
-                <input 
-                className="form-control"
-                name="email"
-                placeholder="Email"
-                onChange={(e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.
-                value }))}
-                />
+      <div className="rg-left">
+        <div className="rg-left-inner">
+          <Link to="/" className="rg-brand">CraftMate</Link>
+          <p className="rg-brand-tag">Your creative community awaits</p>
 
-                 {submitted && validate().email && (
-          <div className="text-danger small">{validate().email}</div>
-        )}
+          <div className="rg-decor-pins">
+            <div className="rg-pin rg-pin-1" />
+            <div className="rg-pin rg-pin-2" />
+            <div className="rg-pin rg-pin-3" />
+            <div className="rg-pin rg-pin-4" />
+          </div>
 
-                <div className="password-wrapper">
-                          <input
-                            className="form-control"
-                            name="password"
-                            type={showPassword ? "text" : "password"}
-                            placeholder="Password"
-                            onChange={(e) =>
-                              setForm((prev) => ({ ...prev, password: e.target.value }))
-                            }
-                          />
-                
-                          <span
-                            className="eye-icon"
-                            onClick={() => setShowPassword(!showPassword)}
-                          >
-                            {showPassword ? <FaEyeSlash /> : <FaEye />}
-                          </span>
-                        </div>
-
-         {submitted && validate().password && (
-          <div className="text-danger small">{validate().password}</div>
-        )}
-
-                <input 
-                className="form-control"
-                name="phone"
-                placeholder="Phone"
-                onChange={(e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.
-                value }))}
-                />
-
-                <button  type="submit" className="signup">Submit</button>
-                <span> Already have an account? 
-                <Link to="/login" 
-                    style={{ 
-                         color: "chocolate",
-                         textDecoration: "none",
-                          fontWeight: "500",
-                          marginTop: "10px",
-                          paddingLeft: "10px"
-                        
-                    }}>
-               Sign In</Link>
-                </span>
-
-            </form>
+          <div className="rg-left-footer">
+            <p>"The desire to create is one of the deepest yearnings of the human soul."</p>
+          </div>
         </div>
-     )
+      </div>
 
+      <div className="rg-right">
+        <div className="rg-form-wrap">
 
+          <span className="rg-eyebrow">Get Started</span>
+          <h1 className="rg-title">Create an <em>Account</em></h1>
+          <p className="rg-subtitle">Join thousands of crafters on CraftMate.</p>
 
+          <form onSubmit={handleSubmit} className="rg-form">
+
+            <div className="rg-field">
+              <label className="rg-label">Full Name</label>
+              <input
+                className={`rg-input ${submitted && errs.name ? 'rg-input--error' : ''}`}
+                name="name"
+                type="text"
+                placeholder="Your full name"
+                onChange={(e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))}
+              />
+              {submitted && errs.name && <span className="rg-error">✕ {errs.name}</span>}
+            </div>
+
+            <div className="rg-field">
+              <label className="rg-label">Email</label>
+              <input
+                className={`rg-input ${submitted && errs.email ? 'rg-input--error' : ''}`}
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                onChange={(e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))}
+              />
+              {submitted && errs.email && <span className="rg-error">✕ {errs.email}</span>}
+            </div>
+
+            <div className="rg-field">
+              <label className="rg-label">Password</label>
+              <div className="rg-password-wrap">
+                <input
+                  className={`rg-input ${submitted && errs.password ? 'rg-input--error' : ''}`}
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Min. 6 characters"
+                  onChange={(e) => setForm(prev => ({ ...prev, password: e.target.value }))}
+                />
+                <button
+                  type="button"
+                  className="rg-eye"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
+              {submitted && errs.password && <span className="rg-error">✕ {errs.password}</span>}
+            </div>
+
+            <div className="rg-field">
+              <label className="rg-label">Phone <span className="rg-optional">(optional)</span></label>
+              <input
+                className="rg-input"
+                name="phone"
+                type="tel"
+                placeholder="+91 00000 00000"
+                onChange={(e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))}
+              />
+            </div>
+
+            <button type="submit" className="rg-submit">
+              Create Account →
+            </button>
+
+            <div className="rg-divider">
+              <span />
+              <p>Already have an account?</p>
+              <span />
+            </div>
+
+            <Link to="/login" className="rg-signin-btn">
+              Sign In
+            </Link>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  );
 }

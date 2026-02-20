@@ -23,24 +23,22 @@ export default function Login() {
   }, [location]);
 
   useEffect(() => {
-  if (!loading && token && user) {
-    if (user.role === "admin") {
-      navigate("/admin/dashboard", { replace: true });
-    } else {
-      navigate("/", { replace: true });
+    if (!loading && token && user) {
+      if (user.role === "admin") {
+        navigate("/admin/dashboard", { replace: true });
+      } else {
+        navigate("/", { replace: true });
+      }
     }
-  }
-}, [loading, token, user, navigate]);
+  }, [loading, token, user, navigate]);
 
   const validate = () => {
     const errs = {};
     if (!form.email) errs.email = "Email is required";
     else if (!form.email.includes("@")) errs.email = "Invalid email";
-
     if (!form.password) errs.password = "Password is required";
     else if (form.password.length < 6)
       errs.password = "Password must be at least 6 characters";
-
     return errs;
   };
 
@@ -49,86 +47,109 @@ export default function Login() {
     setSubmitted(true);
     const errs = validate();
     if (Object.keys(errs).length) return;
-
     try {
       await login(form);
-
     } catch (err) {
       alert(err?.response?.data?.message || err.message);
     }
   };
 
+  const errs = validate();
+
   return (
-    <div className="login">
-      <form onSubmit={handleSubmit} className="form d-flex flex-column">
-        {notice && <div className="alert alert-success">{notice}</div>}
+    <div className="lg-page" style={{ minHeight: "100vh", background: "#f5f0eb" }}>
 
-        <h1 className="title">Login</h1>
+      <div className="lg-left">
+        <div className="lg-left-inner">
+          <Link to="/" className="lg-brand">CraftMate</Link>
+          <p className="lg-brand-tag">Where every craft tells a story</p>
 
-        <input
-          className="form-control"
-          name="email"
-          placeholder="Email"
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, email: e.target.value }))
-          }
-        />
-        {submitted && validate().email && (
-          <div className="text-danger small">{validate().email}</div>
-        )}
+          <div className="lg-decor-pins">
+            <div className="lg-pin lg-pin-1" />
+            <div className="lg-pin lg-pin-2" />
+            <div className="lg-pin lg-pin-3" />
+          </div>
 
-        <div className="password-wrapper">
-          <input
-            className="form-control"
-            name="password"
-            type={showPassword ? "text" : "password"}
-            placeholder="Password"
-            onChange={(e) =>
-              setForm((prev) => ({ ...prev, password: e.target.value }))
-            }
-          />
-
-          <span
-            className="eye-icon"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
+          <div className="lg-left-footer">
+            <p>"Creativity is not a talent.<br />It is a way of operating."</p>
+          </div>
         </div>
-
-        {submitted && validate().password && (
-          <div className="text-danger small">{validate().password}</div>
-        )}
-
-        <button type="submit" className="signin">
-          Submit
-        </button>
-
-        <div className="login-links" 
-        style={{marginTop: "15px", display: "flex", 
-        justifyContent: "space-between"}}>
-
-         <Link to="/forgot-password"
-          style={{color: "chocolate",
-            textDecoration: "none",
-            fontWeight: "500",
-            
-          }}>
-            Forgot Password?
-        </Link>
-
-        <Link to="/register" 
-        style={{ 
-         color: "chocolate",
-         textDecoration: "none",
-          fontWeight: "500",
-        
-         }}>
-          Sign Up</Link>
-
-        </div>
-
-      </form>
       </div>
+
+      <div className="lg-right">
+        <div className="lg-form-wrap">
+
+          <span className="lg-eyebrow">Welcome back</span>
+          <h1 className="lg-title">Sign <em>In</em></h1>
+          <p className="lg-subtitle">Log in to access your saved crafts and tutorials.</p>
+
+          {notice && (
+            <div className="lg-notice">
+              <span>✦</span> {notice}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="lg-form">
+
+            <div className="lg-field">
+              <label className="lg-label">Email</label>
+              <input
+                className={`lg-input ${submitted && errs.email ? 'lg-input--error' : ''}`}
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                onChange={(e) => setForm(prev => ({ ...prev, email: e.target.value }))}
+              />
+              {submitted && errs.email && (
+                <span className="lg-error">✕ {errs.email}</span>
+              )}
+            </div>
+
+            <div className="lg-field">
+              <label className="lg-label">Password</label>
+              <div className="lg-password-wrap">
+                <input
+                  className={`lg-input ${submitted && errs.password ? 'lg-input--error' : ''}`}
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Min. 6 characters"
+                  onChange={(e) => setForm(prev => ({ ...prev, password: e.target.value }))}
+                />
+                <button
+                  type="button"
+                  className="lg-eye"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
+              {submitted && errs.password && (
+                <span className="lg-error">✕ {errs.password}</span>
+              )}
+            </div>
+
+            <div className="lg-forgot-row">
+              <Link to="/forgot-password" className="lg-link">Forgot password?</Link>
+            </div>
+
+            <button type="submit" className="lg-submit">
+              Sign In →
+            </button>
+
+            <div className="lg-divider">
+              <span />
+              <p>Don't have an account?</p>
+              <span />
+            </div>
+
+            <Link to="/register" className="lg-signup-btn">
+              Create an Account
+            </Link>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
   );
 }
