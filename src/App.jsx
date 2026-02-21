@@ -31,6 +31,7 @@ import AddCraft from "./Components/Admin/Addcraft";
 import AdminCraftDetails from "./Components/Admin/AdminCraftDetails";
 import EditCraft from "./Components/Admin/EditCraft";
 import ManageSubmissions from "./Components/Admin/ManageSubmissions";
+import ManageUsers from "./Components/Admin/ManageUsers";
 
 import ProtectedRoute from "./Components/ProtectedRoute";
 import AdminProtectedRoute from "./Components/Admin/AdminProtectedRoute";
@@ -105,7 +106,10 @@ function App() {
 
         <Route path="/crafts/:id/tutorial" element={<TutorialStep />} />
         <Route path="/submit-project" element={<SubmitProject />} />
-        <Route path="community-projects" element={<ProjectPage/>} />
+        <Route path="community-projects" element={
+          <ProtectedRoute>
+            <ProjectPage />
+          </ProtectedRoute>} />
 
         <Route
           path="/findcraft"
@@ -138,8 +142,9 @@ function App() {
             <Route path="crafts" element={<ManageCrafts />} />
             <Route path="add-craft" element={<AddCraft />} />
             <Route path="crafts/:id" element={<AdminCraftDetails />} />
-            <Route path="/admin/edit-craft/:id" element={<EditCraft />} />
+            <Route path="edit-craft/:id" element={<EditCraft />} />
             <Route path="submissions" element={<ManageSubmissions />} />
+            <Route path="users" element={<ManageUsers />} />
 
 
 

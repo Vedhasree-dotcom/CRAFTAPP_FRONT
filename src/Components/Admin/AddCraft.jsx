@@ -1,3 +1,5 @@
+import CraftForm from "./CraftForm";
+
 export default function AddCraft() {
   return (
     <div className="page-container">
