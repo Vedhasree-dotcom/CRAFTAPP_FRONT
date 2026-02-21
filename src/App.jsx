@@ -29,8 +29,8 @@ import AdminLayout from "./Pages/Layout/AdminLayout";
 import ManageCrafts from "./Components/Admin/ManageCrafts";
 import AddCraft from "./Components/Admin/Addcraft";
 import AdminCraftDetails from "./Components/Admin/AdminCraftDetails";
+import EditCraft from "./Components/Admin/EditCraft";
 import ManageSubmissions from "./Components/Admin/ManageSubmissions";
-
 
 import ProtectedRoute from "./Components/ProtectedRoute";
 import AdminProtectedRoute from "./Components/Admin/AdminProtectedRoute";
@@ -138,6 +138,7 @@ function App() {
             <Route path="crafts" element={<ManageCrafts />} />
             <Route path="add-craft" element={<AddCraft />} />
             <Route path="crafts/:id" element={<AdminCraftDetails />} />
+            <Route path="/admin/edit-craft/:id" element={<EditCraft />} />
             <Route path="submissions" element={<ManageSubmissions />} />
 
 
