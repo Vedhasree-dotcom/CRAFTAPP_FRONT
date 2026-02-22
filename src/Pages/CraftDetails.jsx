@@ -24,7 +24,7 @@ function CraftDetails() {
   );
 
   const handleTutorialClick = () => {
-    navigate(`/crafts/${craft._id}/tutorial`);
+    navigate(`/payment/${craft._id}`);
   };
 
   const handleSave = async () => {

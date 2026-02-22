@@ -9,6 +9,7 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Crafts from "./Pages/Crafts";
 import CraftDetails from "./Pages/CraftDetails";
+import PaymentPage from "./Pages/PaymentPage";
 import TutorialStep from "./Components/tutorials/TutorialStep";
 import SubmitProject from "./Pages/SubmitProject";
 import ProjectPage from "./Pages/ProjectPage";
@@ -119,6 +120,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route path="/payment/:craftId" element={<PaymentPage />} />
 
         <Route path="/profile" element={<Profile/>} />
 
