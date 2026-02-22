@@ -3,6 +3,12 @@ body{
   overflow-x: hidden;
 }
 
+/* body.dark {
+  background: #1a1410 !important;
+  color: #e8d5c0;
+} */
+
+
 /*.............. Navbar............... */
 
 .navbar {
@@ -1157,7 +1163,6 @@ body, #root {
 
 .rp-invalid-btn:hover { background: #3d2b17; transform: translateY(-2px); }
 
-/* LEFT */
 .rp-left {
   background: #2a1f14;
   position: relative;
@@ -1255,7 +1260,6 @@ body, #root {
   line-height: 1.75;
 }
 
-/* RIGHT */
 .rp-right {
   display: flex;
   align-items: center;

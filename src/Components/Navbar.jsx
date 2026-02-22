@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../Context/AuthContext";
+import { useAuth} from "../Context/AuthContext";
+import { useTheme } from "../Context/ThemeContext";
 import { useState } from "react";
 import { FaUserCircle, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 
@@ -7,6 +8,8 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
 
   const confirmLogout = async () => {
     await logout();
@@ -34,11 +37,16 @@ const Navbar = () => {
           
           <Link to="/community-projects">Community</Link>
 
+          
           {user && (
             <Link to="/profile" className="icon-btn">
               <FaUserCircle size={24} />
             </Link>
           )}
+
+          <button onClick={toggleTheme}>
+            {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+          </button>
 
           {!user ? (
             <Link to="/login" className="icon-btn">
