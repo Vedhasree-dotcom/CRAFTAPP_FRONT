@@ -8,7 +8,7 @@ import { AuthProvider } from "./Context/AuthContext.jsx";
 import { ThemeProvider } from "./Context/ThemeContext.jsx";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
-
+console.log("PayPal ID:", import.meta.env.VITE_PAYPAL_CLIENT_ID?.slice(0,10));
 import "bootstrap/dist/css/bootstrap.min.css";
 
 createRoot(document.getElementById("root")).render(
