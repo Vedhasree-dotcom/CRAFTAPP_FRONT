@@ -18,7 +18,7 @@ createRoot(document.getElementById("root")).render(
         <ThemeProvider>
           <PayPalScriptProvider
             options={{
-              "client-id": "ASBSvq2DNI-epeu2u5wWj-3oB4Ta-3QzoVBwmo1LMu4XtZqqumV9igt5-qCQXydYVueRjmtSnHXFSXXi",
+              "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID,
               currency: "USD"
             }}
           >
