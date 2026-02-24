@@ -14,6 +14,9 @@ export function setAuthToken(token) {
     else delete api.defaults.headers.common["Authorization"];
 }
 
+const savedToken = localStorage.getItem("token");
+if (savedToken) setAuthToken(savedToken);
+
 let isRefreshing = false;
 let refreshSubscribers = [];
 

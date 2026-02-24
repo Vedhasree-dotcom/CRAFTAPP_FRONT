@@ -15,7 +15,8 @@ const { logout, token, loading } = useAuth();
 const navigate = useNavigate();
 
   useEffect(() => {
-  if (loading || !token) return;
+    if (loading) return; // wait for AuthContext to finish
+    if (!token) return;   // do nothing if no token
 
   const fetchStats = async () => {
     try {

@@ -67,18 +67,18 @@ export default function CraftForm({ editingCraft, closeForm, refresh }) {
   });
 
   try {
-    if (editingCraft) {
-      await api.put(`/crafts/${editingCraft._id}`, formData);
-    } else {
-      await api.post("/crafts", formData);
-    }
-
-    refresh();
-    closeForm();
-  } catch (error) {
-    console.error("Error saving craft:", error);
-    alert("Error saving craft");
+  if (editingCraft) {
+    await api.put(`/crafts/${editingCraft._id}`, formData);
+  } else {
+    await api.post("/crafts", formData);
   }
+
+  if (refresh) refresh(); 
+  closeForm();
+} catch (error) {
+  console.error("Error saving craft:", error);
+  alert("Error saving craft");
+}
 };
 
   return (

@@ -48,15 +48,20 @@ export function AuthProvider({ children }) {
     return await api.post("/auth/register", form);
   };
 
- const login = async (form) => {
+
+const login = async (form) => {
   const res = await api.post("/auth/login", form);
 
   if (res?.data?.accessToken) {
     const newToken = res.data.accessToken;
 
-    setAuthToken(newToken);   // important
+    setAuthToken(newToken);   
     setToken(newToken);
     localStorage.setItem("token", newToken);
+
+    const decodedUser = decodeToken(newToken);
+    setUser(decodedUser);
+    localStorage.setItem("user", JSON.stringify(decodedUser));
   }
 
   return res;

@@ -5,7 +5,6 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import { AuthProvider } from "./Context/AuthContext.jsx";
-import { ThemeProvider } from "./Context/ThemeContext.jsx";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 console.log("PayPal ID:", import.meta.env.VITE_PAYPAL_CLIENT_ID?.slice(0,10));
@@ -15,7 +14,6 @@ createRoot(document.getElementById("root")).render(
   // <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <ThemeProvider>
           <PayPalScriptProvider
             options={{
               "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID,
@@ -24,7 +22,6 @@ createRoot(document.getElementById("root")).render(
           >
         <App />
         </PayPalScriptProvider>
-        </ThemeProvider>
       </AuthProvider>
     </BrowserRouter>
   // </StrictMode>

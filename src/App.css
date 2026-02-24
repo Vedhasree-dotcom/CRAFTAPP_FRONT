@@ -3,19 +3,13 @@ body{
   overflow-x: hidden;
 }
 
-/* body.dark {
-  background: #1a1410 !important;
-  color: #e8d5c0;
-} */
-
 
 /*.............. Navbar............... */
-
-.navbar {
-  position: fixed !important;
-  top: 12px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
+.nb-nav {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
   width: calc(100% - 48px);
   max-width: 1080px;
   z-index: 1000;
@@ -25,232 +19,460 @@ body{
   justify-content: space-between;
   gap: 12px;
 
-  padding: 9px 12px 9px 20px;
+  padding: 10px 12px 10px 22px;
   border-radius: 999px;
 
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(245, 240, 235, 0.88);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(176, 125, 58, 0.18);
   box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.08),
-    0 1px 3px rgba(0, 0, 0, 0.05);
+    0 4px 24px rgba(42, 31, 20, 0.1),
+    0 1px 3px rgba(42, 31, 20, 0.06);
 
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-
-.navbar .logo {
-  font-family: 'Syne', sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  color: #111;
+.nb-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2a1f14;
   letter-spacing: -0.5px;
-  cursor: pointer;
-  margin: 0;
+  text-decoration: none;
   display: flex;
   align-items: center;
   gap: 0;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
 }
 
-.navbar .logo::before {
+.nb-logo::before {
   content: '';
   display: inline-block;
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: #e60023;
+  background: #b07d3a;
   margin-right: 8px;
-  box-shadow: 0 0 0 3px rgba(230, 0, 35, 0.15);
+  box-shadow: 0 0 0 3px rgba(176, 125, 58, 0.18);
   flex-shrink: 0;
 }
 
+.nb-logo:hover { opacity: 0.8; }
 
-.navbar .nav-right {
+.nb-links {
   display: flex;
   align-items: center;
   gap: 2px;
+  flex: 1;
+  justify-content: center;
 }
 
-.navbar .nav-right a {
+.nb-link {
   font-family: 'DM Sans', sans-serif;
   font-size: 13.5px;
   font-weight: 500;
-  color: #444;
+  color: #6b5240;
   text-decoration: none;
   padding: 7px 14px;
   border-radius: 999px;
   transition: background 0.18s ease, color 0.18s ease;
+  white-space: nowrap;
 }
 
-.navbar .nav-right a:hover {
-  background: rgba(0, 0, 0, 0.06);
-  color: #111;
+.nb-link:hover {
+  background: rgba(176, 125, 58, 0.1);
+  color: #2a1f14;
 }
 
+.nb-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
 
-.navbar .nav-right .icon-btn {
+.nb-icon-btn {
   width: 36px;
   height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  color: #555;
+  color: #6b5240;
   background: transparent;
   border: none;
   cursor: pointer;
   text-decoration: none;
   padding: 0;
-
   transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 
-.navbar .nav-right .icon-btn:hover {
-  background: rgba(0, 0, 0, 0.07);
-  color: #111;
-  transform: scale(1.1);
+.nb-icon-btn:hover {
+  background: rgba(176, 125, 58, 0.12);
+  color: #2a1f14;
+  transform: scale(1.08);
 }
 
-.navbar .nav-right .logout-icon:hover {
-  background: rgba(230, 0, 35, 0.09);
-  color: #e60023;
+.nb-logout:hover {
+  background: rgba(200, 50, 50, 0.1) !important;
+  color: #c03232 !important;
 }
 
-.navbar .nav-right a.icon-btn[href="/login"] {
-  width: auto;
-  padding: 7px 16px;
+.nb-signin-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
   border-radius: 999px;
-  background: #e60023;
-  color: #fff;
+  background: linear-gradient(135deg, #b07d3a, #2a1f14);
+  color: #e8c89a;
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   font-weight: 600;
-  gap: 6px;
-  box-shadow: 0 2px 10px rgba(230, 0, 35, 0.25);
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(176, 125, 58, 0.3);
+  transition: opacity 0.2s, transform 0.2s;
 }
 
-.navbar .nav-right a.icon-btn[href="/login"]:hover {
-  background: #c0001f;
+.nb-signin-btn:hover {
+  opacity: 0.9;
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(230, 0, 35, 0.35);
+  box-shadow: 0 4px 16px rgba(176, 125, 58, 0.4);
+}
+
+.nb-hamburger {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(176, 125, 58, 0.1);
+  border: 1px solid rgba(176, 125, 58, 0.2);
+  color: #2a1f14;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.nb-hamburger:hover {
+  background: rgba(176, 125, 58, 0.18);
 }
 
 
-.popup-overlay {
+.nb-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(42, 31, 20, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.nb-backdrop--open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+
+.nb-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  width: 300px;
+  background: #fff;
+  z-index: 1999;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -8px 0 40px rgba(42, 31, 20, 0.15);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nb-drawer--open {
+  transform: translateX(0);
+}
+
+.nb-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(176, 125, 58, 0.1);
+  background: #2a1f14;
+}
+
+.nb-drawer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #e8c89a;
+  letter-spacing: -0.5px;
+}
+
+.nb-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(232, 200, 154, 0.1);
+  border: 1px solid rgba(232, 200, 154, 0.2);
+  color: #e8c89a;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.nb-close:hover { background: rgba(232, 200, 154, 0.2); }
+
+.nb-drawer-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px 0;
+  gap: 2px;
+  overflow-y: auto;
+}
+
+.nb-drawer-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #2a1f14;
+  text-decoration: none;
+  padding: 13px 16px;
+  border-radius: 12px;
+  transition: background 0.18s ease, color 0.18s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nb-drawer-link:hover {
+  background: rgba(176, 125, 58, 0.08);
+  color: #b07d3a;
+}
+
+.nb-drawer-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(176, 125, 58, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nb-drawer-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #f5f0eb;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nb-drawer-profile:hover { background: #ede5d8; }
+
+.nb-drawer-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #b07d3a, #2a1f14);
+  color: #e8c89a;
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nb-drawer-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2a1f14;
+  margin-bottom: 2px;
+}
+
+.nb-drawer-role {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #9a8272;
+  font-weight: 500;
+}
+
+.nb-drawer-signin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #b07d3a, #2a1f14);
+  color: #e8c89a;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nb-drawer-signin:hover { opacity: 0.9; }
+
+.nb-drawer-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px;
+  border-radius: 999px;
+  background: rgba(200, 50, 50, 0.08);
+  border: 1.5px solid rgba(200, 50, 50, 0.2);
+  color: #c03232;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.nb-drawer-logout:hover { background: rgba(200, 50, 50, 0.14); }
+
+
+.nb-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(42, 31, 20, 0.45);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: overlayIn 0.2s ease;
+  animation: nb-overlay-in 0.2s ease;
 }
 
-@keyframes overlayIn {
+@keyframes nb-overlay-in {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
-.popup-box {
+.nb-popup {
   background: #fff;
   border-radius: 24px;
   padding: 36px 32px 28px;
   width: 300px;
   text-align: center;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
-  animation: popIn 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 24px 60px rgba(42, 31, 20, 0.2);
+  animation: nb-pop-in 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes popIn {
+@keyframes nb-pop-in {
   from { opacity: 0; transform: scale(0.92) translateY(16px); }
-  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-.popup-box h3 {
-  font-family: 'Syne', sans-serif;
-  font-size: 19px;
+.nb-popup h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
   font-weight: 700;
-  color: #111;
+  color: #2a1f14;
   margin-bottom: 8px;
 }
 
-.popup-box p {
+.nb-popup p {
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
-  color: #888;
+  color: #9a8272;
   margin-bottom: 24px;
+  line-height: 1.5;
 }
 
-.popup-actions {
+.nb-popup-actions {
   display: flex;
   gap: 10px;
 }
 
-.btn-no {
+.nb-popup-no {
   flex: 1;
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  padding: 11px;
+  padding: 12px;
   border-radius: 999px;
-  border: 1.5px solid #e5e5e5;
+  border: 1.5px solid rgba(176, 125, 58, 0.2);
   background: #fff;
-  color: #333;
+  color: #6b5240;
   cursor: pointer;
-  transition: all 0.18s ease;
-}
-.btn-no:hover {
-  background: #f5f5f5;
-  border-color: #ccc;
+  transition: background 0.18s ease, border-color 0.18s;
 }
 
-.btn-yes {
+.nb-popup-no:hover {
+  background: #f5f0eb;
+  border-color: rgba(176, 125, 58, 0.35);
+}
+
+.nb-popup-yes {
   flex: 1;
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  padding: 11px;
+  padding: 12px;
   border-radius: 999px;
   border: none;
-  background: #e60023;
+  background: linear-gradient(135deg, #c03232, #8b1a1a);
   color: #fff;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(230, 0, 35, 0.25);
-  transition: all 0.18s ease;
+  box-shadow: 0 2px 10px rgba(200, 50, 50, 0.25);
+  transition: opacity 0.18s ease, transform 0.18s;
 }
-.btn-yes:hover {
-  background: #c0001f;
+
+.nb-popup-yes:hover {
+  opacity: 0.9;
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(230, 0, 35, 0.35);
 }
 
    /* RESPONSIVE */
-@media (max-width: 680px) {
-  .navbar {
-    width: calc(100% - 24px) !important;
-    border-radius: 20px !important;
-    padding: 10px 12px !important;
-    flex-wrap: wrap;
+
+@media (max-width: 768px) {
+  .nb-nav {
+    width: calc(100% - 24px);
+    padding: 10px 12px 10px 18px;
+    border-radius: 20px;
   }
 
-  .navbar .nav-right {
-    gap: 0;
-    flex-wrap: wrap;
-  }
-
-  .navbar .nav-right a {
-    font-size: 12.5px;
-    padding: 6px 10px;
-  }
+  .nb-links  { display: none; }
+  .nb-actions { display: none; }
+  .nb-hamburger { display: flex; }
 }
 
+@media (max-width: 480px) {
+  .nb-nav {
+    top: 8px;
+    width: calc(100% - 16px);
+    padding: 9px 10px 9px 16px;
+    border-radius: 16px;
+  }
 
-/* Forgot password */
+  .nb-logo { font-size: 18px; }
+  .nb-drawer { width: 280px; }
+}
+
+@media (max-width: 360px) {
+  .nb-drawer { width: 100%; }
+}
+
+/*............ Forgot password........... */
 
 .fp-page {
   font-family: 'DM Sans', sans-serif;
