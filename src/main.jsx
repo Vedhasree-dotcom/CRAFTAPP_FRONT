@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+// import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
@@ -12,7 +12,7 @@ console.log("PayPal ID:", import.meta.env.VITE_PAYPAL_CLIENT_ID?.slice(0,10));
 import "bootstrap/dist/css/bootstrap.min.css";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  // <StrictMode>
     <BrowserRouter>
       <AuthProvider>
         <ThemeProvider>
@@ -27,5 +27,5 @@ createRoot(document.getElementById("root")).render(
         </ThemeProvider>
       </AuthProvider>
     </BrowserRouter>
-  </StrictMode>
+  // </StrictMode>
 );
