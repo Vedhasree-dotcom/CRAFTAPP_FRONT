@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../Services/api";
+import "./Category.css";
 
 function Paper() {
   const [paperCrafts, setPaperCrafts] = useState([]);
@@ -14,72 +15,72 @@ function Paper() {
       } catch (error) {
         console.error("Error fetching paper crafts:", error);
       } finally {
-        setLoading(false);      
+        setLoading(false);
       }
     };
-
     fetchPaperCrafts();
   }, []);
 
-  if (loading) return <p>Loading paper crafts...</p>;
-
   return (
-    <div className="paper-page">
-      <h3>Paper Crafts</h3>
+    <div className="pp2-page">
 
-      <p style={{ textAlign: "justify" }}>
-        Explore a variety of paper crafts including origami, paper mache,
-        quilling, and more. Discover tutorials, tips, and inspiration to create
-        beautiful paper art.
-      </p>
+      <div className="pp2-header">
+        <h1>Paper <em>Crafts</em></h1>
+        <p>
+          Explore origami, paper mache, quilling, and more — discover tutorials
+          and inspiration to create beautiful paper art.
+        </p>
+      </div>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "15px" }}>
-        {paperCrafts.length === 0 ? (
-          <p>No paper crafts found</p>
-        ) : (
-          paperCrafts.map(craft => (
-            <div
-              key={craft._id}
-              style={{
-                width: "250px",
-                border: "1px solid #ddd",
-                borderRadius: "10px",
-                padding: "15px",
-                boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-              }}
-            >
-              <img
-                src={`${import.meta.env.VITE_SERVER_URL}${craft.image}` || "https://via.placeholder.com/150x350"}
-                alt={craft.title}
-                style={{
-                  width: "100%",
-                  height: "160px",
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                }}
-              />
+      <div className="pp2-body">
 
-              <h4 style={{fontSize: "18px", marginTop: "15px"}}>{craft.title}</h4>
-              <p style={{ fontSize: "14px" }}>{craft.description}</p>
-              <p style={{ color: "red" }}><strong>Purchase:</strong> ₹{craft.price}</p>
-
-              <Link
-                to={`/crafts/${craft._id}`}
-                style={{
-                  background: "brown",
-                  color: "white",
-                  padding: "6px 10px",
-                  borderRadius: "4px",
-                  textDecoration: "none",
-                  fontSize: "14px",
-                  marginBottom: "20px",
-                }}
-              >
-                View Details
-              </Link>
-            </div>
-          ))
+        {loading && (
+          <div className="pp2-idle">
+            <div className="pp2-spinner" />
+            <p>Loading paper crafts...</p>
+          </div>
         )}
+
+        {!loading && paperCrafts.length === 0 && (
+          <div className="pp2-idle">
+            <span className="pp2-idle-icon">◈</span>
+            <h3>No paper crafts found</h3>
+            <p>Check back soon — new crafts are added regularly!</p>
+          </div>
+        )}
+
+        {!loading && paperCrafts.length > 0 && (
+          <>
+            <div className="pp2-grid">
+              {paperCrafts.map((craft, i) => (
+                <div
+                  key={craft._id}
+                  className="pp2-pin"
+                >
+                  <img
+                    src={`${import.meta.env.VITE_SERVER_URL}${craft.image}` || "https://via.placeholder.com/300x200"}
+                    alt={craft.title}
+                    className="pp2-pin-img"
+                  />
+
+                  <div className="pp2-category-badge">Paper</div>
+
+                  <div className="pp2-pin-body">
+                    <h4>{craft.title}</h4>
+                    <p className="pp2-desc">{craft.description}</p>
+                    <div className="pp2-pin-footer">
+                      <span className="pp2-price">₹{craft.price}</span>
+                      <Link to={`/crafts/${craft._id}`} className="pp2-view-btn">
+                        View Details ↗
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
       </div>
     </div>
   );

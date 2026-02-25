@@ -1,86 +1,81 @@
-import React from 'react'
-import { useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
-import api from "../Services/api"
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import api from "../Services/api";
+import "./Category.css";
 
 function Knitting() {
+  const [knittingCrafts, setKnittingCrafts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    const [knittingCrafts, setKnittingCrafts] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchKnittingCrafts = async () => {
-            try {
-                const res = await api.get("/crafts/category/knitting");
-                setKnittingCrafts(res.data);
-            }
-            catch(error){
-                console.log("Error fetching knitting crafts", error); 
-            }
-            finally {
-                setLoading(false);
-            }
-        }
-        fetchKnittingCrafts()
-    }, []);
-
-    if(loading) return <p> loading knitting crafts...</p>
+  useEffect(() => {
+    const fetchKnittingCrafts = async () => {
+      try {
+        const res = await api.get("/crafts/category/knitting");
+        setKnittingCrafts(res.data);
+      } catch (error) {
+        console.log("Error fetching knitting crafts", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchKnittingCrafts();
+  }, []);
 
   return (
-    <div className='knitting page'>
-        <h3>Knitting Crafts</h3>
-        <p style={{textAlign: 'justify'}}>Discover the art of knitting with our collection of knitting crafts. From cozy scarves to intricate sweaters, find patterns, tips, and inspiration to create your own handmade knitwear.</p>
+    <div className="pp2-page">
+      <div className="pp2-header">
+        <h1>Knitting <em>Crafts</em></h1>
+        <p>
+          Discover cozy scarves, intricate sweaters and more — find patterns,
+          tips and inspiration to create your own handmade knitwear.
+        </p>
+      </div>
 
-         <div style={{ display: "flex", flexWrap: "wrap", gap: "15px" }}>
-        {knittingCrafts.length === 0 ? (
-            <p>No knitting crafts found</p>
-        ) : (
-            knittingCrafts.map(craft => (
-            <div
-                key={craft._id}
-                    style={{
-                        width: "250px",
-                        border: "1px solid #ddd",
-                        borderRadius: "10px",
-                        padding: "15px",
-                        boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-                        }}
-        >
-                          <img
-                            src={`${import.meta.env.VITE_SERVER_URL}${craft.image}` || "https://via.placeholder.com/150x350"}
-                            alt={craft.title}
-                            style={{
-                              width: "100%",
-                              height: "160px",
-                              objectFit: "cover",
-                              borderRadius: "8px",
-                            }}
-                          />
-            
-                          <h4 style={{fontSize: "18px", marginTop: "15px"}}>{craft.title}</h4>
-                          <p style={{ fontSize: "14px" }}>{craft.description}</p>
-                          <p style={{ color: "red" }}><strong>Purchase:</strong> ₹{craft.price}</p>
-            
-                          <Link
-                            to={`/crafts/${craft._id}`}
-                            style={{
-                              background: "brown",
-                              color: "white",
-                              padding: "6px 10px",
-                              borderRadius: "4px",
-                              textDecoration: "none",
-                              fontSize: "14px",
-                              marginBottom: "20px",
-                            }}
-                          >
-                            View Details
-                          </Link>
-                        </div>
-                      ))
-                    )}
+      <div className="pp2-body">
+
+        {loading && (
+          <div className="pp2-idle">
+            <div className="pp2-spinner" />
+            <p>Loading knitting crafts...</p>
+          </div>
+        )}
+
+        {!loading && knittingCrafts.length === 0 && (
+          <div className="pp2-idle">
+            <span className="pp2-idle-icon">◈</span>
+            <h3>No knitting crafts found</h3>
+            <p>Check back soon — new crafts are added regularly!</p>
+          </div>
+        )}
+
+        {!loading && knittingCrafts.length > 0 && (
+          <div className="pp2-grid">
+            {knittingCrafts.map((craft) => (
+              <div key={craft._id} className="pp2-pin">
+                <img
+                  src={`${import.meta.env.VITE_SERVER_URL}${craft.image}` || "https://via.placeholder.com/300x200"}
+                  alt={craft.title}
+                  className="pp2-pin-img"
+                />
+                <div className="pp2-category-badge">Knitting</div>
+                <div className="pp2-pin-body">
+                  <h4>{craft.title}</h4>
+                  <p className="pp2-desc">{craft.description}</p>
+                  <div className="pp2-pin-footer">
+                    <span className="pp2-price">₹{craft.price}</span>
+                    <Link to={`/crafts/${craft._id}`} className="pp2-view-btn">
+                      View Details ↗
+                    </Link>
                   </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+      </div>
     </div>
-  )
+  );
 }
 
-export default Knitting
+export default Knitting;

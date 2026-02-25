@@ -2981,8 +2981,8 @@ body {
 }
 
 .ac-grid {
-  columns: 3;
-  column-gap: 16px;
+  columns: 4;
+  column-gap: 10px;
 }
 
 .ac-pin {
@@ -3005,20 +3005,21 @@ body {
   box-shadow: 0 16px 40px rgba(42,31,20,0.14);
 }
 
+/* Replace these three image height rules */
 .ac-pin-img {
   width: 100%;
   display: block;
   object-fit: cover;
-  height: 220px;
+  height: 220px;          /* unified height for all cards */
   transition: transform 0.5s ease;
 }
 
 .ac-pin--tall .ac-pin-img {
-  height: 300px;
-}
+  height: 220px;     
+}     
 
 .ac-pin--short .ac-pin-img {
-  height: 170px;
+  height: 220px;          
 }
 
 .ac-pin:hover .ac-pin-img {
