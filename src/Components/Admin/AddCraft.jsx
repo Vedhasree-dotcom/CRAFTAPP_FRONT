@@ -1,21 +1,31 @@
 import CraftForm from "./CraftForm";
 import { useNavigate } from "react-router-dom";
+import "./style.css";
 
-export default function AddCraft() {
+function AddCraft() {
   const navigate = useNavigate();
 
   const closeForm = () => {
-    navigate("/admin/crafts"); 
+    navigate("/admin/crafts");
   };
 
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <h1>Add New Craft</h1>
-        <p>Create a new craft with tutorial steps</p>
+    <div className="ac-page">
+
+      <div className="ac-header">
+        <div>
+          <span className="ac-eyebrow">Admin Panel</span>
+          <h1>Add New <em>Craft</em></h1>
+        </div>
+        <button className="ac-back-btn" onClick={closeForm}>
+          ← Back to Crafts
+        </button>
       </div>
 
       <CraftForm closeForm={closeForm} />
+
     </div>
   );
 }
+
+export default AddCraft;

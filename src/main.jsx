@@ -7,7 +7,7 @@ import App from "./App.jsx";
 import { AuthProvider } from "./Context/AuthContext.jsx";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 createRoot(document.getElementById("root")).render(
   // <StrictMode>

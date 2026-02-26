@@ -2981,15 +2981,16 @@ body {
 }
 
 .ac-grid {
-  columns: 4;
-  column-gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 }
 
 .ac-pin {
   break-inside: avoid;
   margin-bottom: 16px;
-  display: block;
-  border-radius: 16px;
+  display: flex;
+  flex-direction: column;  border-radius: 16px;
   overflow: hidden;
   background: #fff;
   box-shadow: 0 2px 12px rgba(42,31,20,0.08);
@@ -3005,12 +3006,11 @@ body {
   box-shadow: 0 16px 40px rgba(42,31,20,0.14);
 }
 
-/* Replace these three image height rules */
 .ac-pin-img {
   width: 100%;
   display: block;
   object-fit: cover;
-  height: 220px;          /* unified height for all cards */
+  height: 220px;          
   transition: transform 0.5s ease;
 }
 
@@ -3044,6 +3044,9 @@ body {
 }
 
 .ac-pin-body {
+  flex: 1;                  /* stretches body to fill remaining space */
+  display: flex;
+  flex-direction: column;
   padding: 14px 16px 16px;
 }
 
@@ -3141,7 +3144,8 @@ body {
 
 @media (max-width: 500px) {
   .ac-grid {
-    columns: 1;
+    display: flex;
+    flex-direction: column;
   }
   .ac-header {
     flex-direction: column;
@@ -4735,8 +4739,9 @@ body, #root {
 }
 
 .pf-grid {
-  columns: 4;
-  column-gap: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
 }
 
 .pf-pin {
@@ -4761,7 +4766,7 @@ body, #root {
 
 .pf-pin-img {
   width: 100%;
-  height: 200px;
+  height: 280px;
   object-fit: cover;
   display: block;
   transition: transform 0.5s ease;
@@ -5017,7 +5022,7 @@ body, #root {
 
   .pf-content { padding: 0 24px; margin-top: 24px; }
 
-  .pf-grid  { columns: 2; column-gap: 12px; }
+  .pf-grid  { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
   .pf-about { grid-template-columns: 1fr; }
   .pf-about-card,
@@ -5048,8 +5053,8 @@ body, #root {
 
   .pf-content { padding: 0 16px; margin-bottom: 48px; }
 
-  .pf-grid    { columns: 2; column-gap: 10px; }
-  .pf-pin-img { height: 150px; }
+  .pf-grid    { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .pf-pin-img { height: 210px; }
   .pf-pin--tall .pf-pin-img { height: 210px; }
 
   .pf-empty h3 { font-size: 20px; }
