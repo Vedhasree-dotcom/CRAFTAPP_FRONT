@@ -1,12 +1,28 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import { useState, useEffect } from "react";
 import api from "../Services/api";
 import { useAuth } from "../Context/AuthContext";
 
 export default function PaymentPage() {
   const { craftId } = useParams();
   const navigate = useNavigate();
+  const [craft, setCraft] = useState(null);
   const { token } = useAuth();
+  
+
+  useEffect(() => {
+  const fetchCraft = async () => {
+    try {
+      const res = await api.get(`/crafts/${craftId}`);
+      setCraft(res.data);
+    } catch (err) {
+      console.error("Error fetching craft:", err);
+    }
+  };
+
+  fetchCraft();
+}, [craftId]);
 
   const createOrder = async () => {
     const res = await api.post(
@@ -97,6 +113,16 @@ export default function PaymentPage() {
             </div>
 
             <div className="pay-paypal-body">
+
+              {craft && (
+                <div className="pay-summary">
+                  <h3 className="pay-craft-title">{craft.title}</h3>
+                  <p className="pay-craft-price">
+                    ${craft.price.toFixed(2)}
+                  </p>
+                </div>
+              )}
+
               <PayPalButtons
                 createOrder={createOrder}
                 onApprove={onApprove}

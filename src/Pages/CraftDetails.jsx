@@ -23,9 +23,19 @@ function CraftDetails() {
     </div>
   );
 
-  const handleTutorialClick = () => {
-    navigate(`/payment/${craft._id}`);
-  };
+  const handleTutorialClick = async () => {
+  try {
+    const res = await api.get(`/payments/check-purchase/${id}`);
+
+    if (res.data.purchased) {
+      navigate(`/crafts/${id}/tutorial`);  
+    } else {
+      navigate(`/payment/${id}`);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   const handleSave = async () => {
     try {
