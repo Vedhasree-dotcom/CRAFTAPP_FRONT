@@ -13,10 +13,14 @@ import PaymentPage from "./Pages/PaymentPage";
 import TutorialStep from "./Components/tutorials/TutorialStep";
 import SubmitProject from "./Pages/SubmitProject";
 import ProjectPage from "./Pages/ProjectPage";
+
 import AllCrafts from "./Pages/AllCrafts";
 import Paper from "./Pages/Paper";
 import Homedecor from "./Pages/Homedecor";
 import Knitting from "./Pages/Knitting";
+import Painting from "./Pages/Painting";
+import Clay from "./Pages/Clay";  
+
 import FindCraft from "./Pages/FindCraft";
 import Profile from "./Pages/Profile";
 import Register from "./Components/Register";
@@ -94,6 +98,8 @@ function App() {
           <Route path="paper" element={<Paper />} />
           <Route path="home-decor" element={<Homedecor />} />
           <Route path="knitting" element={<Knitting />} />
+          <Route path="painting" element={<Painting />} />
+          <Route path="clay" element={<Clay />} />
         </Route>
 
         <Route

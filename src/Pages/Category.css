@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
 
-.pp2-page {
+.cc2-page {
   font-family: 'DM Sans', sans-serif;
   background: #f5f0eb;
   color: #2a1f14;
@@ -8,41 +8,40 @@
 }
 
 
-.pp2-header {
+.cc2-header {
   max-width: 1200px;
   margin: 0 auto;
   padding: 30px 80px 0;
 }
 
-.pp2-header h1 {
+.cc2-header h1 {
   font-family: 'Playfair Display', serif;
   font-size: 36px;
   font-weight: 700;
   color: #2a1f14;
   letter-spacing: -0.5px;
   line-height: 1.1;
-  /* margin-bottom: 10px; */
 }
 
-.pp2-header h1 em {
+.cc2-header h1 em {
   font-style: italic;
   color: #b07d3a;
 }
 
-.pp2-header p {
+.cc2-header p {
   font-size: 14px;
   color: #9a8272;
   max-width: 520px;
   line-height: 1.7;
 }
 
-.pp2-body {
+.cc2-body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 44px 80px 80px;
 }
 
-.pp2-idle {
+.cc2-idle {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,35 +51,35 @@
   gap: 14px;
 }
 
-.pp2-spinner {
+.cc2-spinner {
   width: 36px;
   height: 36px;
   border: 2px solid rgba(176,125,58,0.2);
   border-top-color: #b07d3a;
   border-radius: 50%;
-  animation: pp2-spin 0.8s linear infinite;
+  animation: cc2-spin 0.8s linear infinite;
 }
 
-@keyframes pp2-spin { to { transform: rotate(360deg); } }
+@keyframes cc2-spin { to { transform: rotate(360deg); } }
 
-.pp2-idle-icon { font-size: 40px; color: #e8c89a; }
+.cc2-idle-icon { font-size: 40px; color: #e8c89a; }
 
-.pp2-idle h3 {
+.cc2-idle h3 {
   font-family: 'Playfair Display', serif;
   font-size: 26px;
   font-weight: 700;
   color: #2a1f14;
 }
 
-.pp2-idle p { font-size: 14px; color: #9a8272; max-width: 280px; line-height: 1.6; }
+.cc2-idle p { font-size: 14px; color: #9a8272; max-width: 280px; line-height: 1.6; }
 
 
-.pp2-grid {
+.cc2-grid {
   columns: 3;
   column-gap: 16px;
 }
 
-.pp2-pin {
+.cc2-pin {
   break-inside: avoid;
   margin-bottom: 16px;
   border-radius: 18px;
@@ -92,12 +91,12 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.pp2-pin:hover {
+.cc2-pin:hover {
   transform: translateY(-5px);
   box-shadow: 0 14px 36px rgba(42,31,20,0.13);
 }
 
-.pp2-pin-img {
+.cc2-pin-img {
   width: 100%;
   height: 220px;
   object-fit: cover;
@@ -105,9 +104,9 @@
   transition: transform 0.5s ease;
 }
 
-.pp2-pin:hover .pp2-pin-img { transform: scale(1.04); }
+.cc2-pin:hover .cc2-pin-img { transform: scale(1.04); }
 
-.pp2-category-badge {
+.cc2-category-badge {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -122,9 +121,9 @@
   border-radius: 100px;
 }
 
-.pp2-pin-body { padding: 14px 16px 16px; }
+.cc2-pin-body { padding: 14px 16px 16px; }
 
-.pp2-pin-body h4 {
+.cc2-pin-body h4 {
   font-family: 'Playfair Display', serif;
   font-size: 16px;
   font-weight: 700;
@@ -133,7 +132,7 @@
   line-height: 1.3;
 }
 
-.pp2-desc {
+.cc2-desc {
   font-size: 12px;
   color: #9a8272;
   line-height: 1.6;
@@ -141,21 +140,21 @@
   overflow: hidden;
 }
 
-.pp2-pin-footer {
+.cc2-pin-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
 }
 
-.pp2-price {
+.cc2-price {
   font-family: 'Playfair Display', serif;
   font-size: 16px;
   font-weight: 700;
   color: #b07d3a;
 }
 
-.pp2-view-btn {
+.cc2-view-btn {
   font-size: 12px;
   font-weight: 600;
   color: #2a1f14;
@@ -168,7 +167,7 @@
   white-space: nowrap;
 }
 
-.pp2-view-btn:hover {
+.cc2-view-btn:hover {
   background: #2a1f14;
   color: #e8c89a;
   border-color: #2a1f14;
@@ -177,29 +176,29 @@
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
-  .pp2-header { padding: 32px 48px 0; }
-  .pp2-body   { padding: 28px 48px 64px; }
-  .pp2-grid   { columns: 3; }
+  .cc2-header { padding: 32px 48px 0; }
+  .cc2-body   { padding: 28px 48px 64px; }
+  .cc2-grid   { columns: 3; }
 }
 
 @media (max-width: 768px) {
-  .pp2-header { padding: 28px 24px 0; }
-  .pp2-body   { padding: 24px 24px 52px; }
-  .pp2-grid   { columns: 2; column-gap: 14px; }
-  .pp2-count-row span { font-size: 22px; }
+  .cc2-header { padding: 28px 24px 0; }
+  .cc2-body   { padding: 24px 24px 52px; }
+  .cc2-grid   { columns: 2; column-gap: 14px; }
+  .cc2-count-row span { font-size: 22px; }
 }
 
 @media (max-width: 480px) {
-  .pp2-header { padding: 20px 16px 0; }
-  .pp2-body   { padding: 18px 16px 44px; }
-  .pp2-grid   { columns: 2; column-gap: 10px; }
-  .pp2-pin-img { height: 170px; }
-  .pp2-pin-body { padding: 10px 12px 12px; }
-  .pp2-pin-body h4 { font-size: 14px; }
-  .pp2-price  { font-size: 14px; }
-  .pp2-view-btn { font-size: 11px; padding: 5px 11px; }
+  .cc2-header { padding: 20px 16px 0; }
+  .cc2-body   { padding: 18px 16px 44px; }
+  .cc2-grid   { columns: 2; column-gap: 10px; }
+  .cc2-pin-img { height: 170px; }
+  .cc2-pin-body { padding: 10px 12px 12px; }
+  .cc2-pin-body h4 { font-size: 14px; }
+  .cc2-price  { font-size: 14px; }
+  .cc2-view-btn { font-size: 11px; padding: 5px 11px; }
 }
 
 @media (max-width: 360px) {
-  .pp2-grid { columns: 1; }
+  .cc2-grid { columns: 1; }
 }
