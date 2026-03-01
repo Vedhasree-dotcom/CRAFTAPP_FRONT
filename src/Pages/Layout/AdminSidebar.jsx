@@ -21,6 +21,7 @@ export default function AdminSidebar() {
     { to: "/admin/users",        label: "Manage Users",      icon: <FaUsers /> },
     { to: "/admin/crafts",       label: "Manage Crafts",     icon: <FaPaintBrush /> },
     { to: "/admin/submissions",  label: "Submissions",       icon: <FaClipboardList /> },
+    { to: "/admin/purchases",    label: "Purchases",         icon: <FaClipboardList /> },
   ];
 
   return (

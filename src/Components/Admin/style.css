@@ -1837,3 +1837,225 @@
   .ms-header h1 { font-size: 28px; }
   .ms-stat-num  { font-size: 32px; }
 }
+
+
+/*............. Purchases.............. */
+
+.ap-page {
+  font-family: 'DM Sans', sans-serif;
+  background: #f5f0eb;
+  color: #2a1f14;
+  min-height: 100vh;
+  padding: 40px 48px 80px;
+}
+
+.ap-eyebrow {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #3a5fa0;
+  margin-bottom: 10px;
+}
+
+.ap-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(58, 95, 160, 0.12);
+}
+
+.ap-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #2a1f14;
+  letter-spacing: -1px;
+  line-height: 1.05;
+}
+
+.ap-header h1 em {
+  font-style: italic;
+  color: #3a5fa0;
+}
+
+.ap-revenue {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  padding-bottom: 4px;
+}
+
+.ap-revenue-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: #2d7a4f;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.ap-revenue-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #9a8272;
+  font-weight: 600;
+}
+
+.ap-idle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  gap: 14px;
+  text-align: center;
+}
+
+.ap-spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(58, 95, 160, 0.2);
+  border-top-color: #3a5fa0;
+  border-radius: 50%;
+  animation: ap-spin 0.8s linear infinite;
+}
+
+@keyframes ap-spin { to { transform: rotate(360deg); } }
+
+.ap-idle-icon { font-size: 40px; color: #c9b49a; }
+
+.ap-idle h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #2a1f14;
+}
+
+.ap-idle p { font-size: 14px; color: #9a8272; }
+
+.ap-meta-row {
+  margin-bottom: 16px;
+}
+
+.ap-meta-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: #3a5fa0;
+  background: rgba(58, 95, 160, 0.1);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.ap-table-wrap {
+  background: #fff;
+  border-radius: 20px;
+  border: 1px solid rgba(58, 95, 160, 0.1);
+  box-shadow: 0 2px 16px rgba(30, 45, 74, 0.07);
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.ap-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.ap-table thead {
+  background: #1e2d4a;
+}
+
+.ap-table thead th {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(232, 200, 154, 0.7);
+  padding: 16px 20px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.ap-table tbody tr {
+  border-bottom: 1px solid rgba(58, 95, 160, 0.06);
+  transition: background 0.15s;
+}
+
+.ap-table tbody tr:last-child { border-bottom: none; }
+
+.ap-table tbody tr:hover {
+  background: rgba(58, 95, 160, 0.03);
+}
+
+.ap-table tbody td {
+  padding: 14px 20px;
+  color: #2a1f14;
+  vertical-align: middle;
+}
+
+.ap-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.ap-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #3a5fa0, #1e2d4a);
+  color: #e8c89a;
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ap-muted {
+  color: #9a8272 !important;
+  font-size: 13px;
+}
+
+.ap-craft-name {
+  font-weight: 500;
+  color: #2a1f14;
+}
+
+.ap-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2d7a4f;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .ap-page { padding: 32px 36px 64px; }
+}
+
+@media (max-width: 768px) {
+  .ap-page   { padding: 24px 24px 56px; }
+  .ap-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .ap-header h1 { font-size: 32px; }
+  .ap-revenue { align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .ap-page { padding: 20px 16px 48px; }
+  .ap-header h1 { font-size: 28px; }
+  .ap-revenue-num { font-size: 28px; }
+  .ap-table thead th,
+  .ap-table tbody td { padding: 12px 14px; }
+}

@@ -37,6 +37,7 @@ import AdminCraftDetails from "./Components/Admin/AdminCraftDetails";
 import EditCraft from "./Components/Admin/EditCraft";
 import ManageSubmissions from "./Components/Admin/ManageSubmissions";
 import ManageUsers from "./Components/Admin/ManageUsers";
+import AdminPurchases from "./Components/Admin/AdminPurchases";
 
 import ProtectedRoute from "./Components/ProtectedRoute";
 import AdminProtectedRoute from "./Components/Admin/AdminProtectedRoute";
@@ -154,6 +155,7 @@ function App() {
             <Route path="edit-craft/:id" element={<EditCraft />} />
             <Route path="submissions" element={<ManageSubmissions />} />
             <Route path="users" element={<ManageUsers />} />
+            <Route path="purchases" element={<AdminPurchases />} />
 
 
 
