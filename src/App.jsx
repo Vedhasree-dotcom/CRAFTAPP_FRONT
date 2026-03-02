@@ -32,7 +32,7 @@ import ResetPassword from "./Components/ResetPassword";
 import AdminDashboard from "./Components/Admin/AdminDashboard";
 import AdminLayout from "./Pages/Layout/AdminLayout";
 import ManageCrafts from "./Components/Admin/ManageCrafts";
-import AddCraft from "./Components/Admin/AddCraftPage";
+import AddCraftPage from "./Components/Admin/AddCraftPage";
 import AdminCraftDetails from "./Components/Admin/AdminCraftDetails";
 import EditCraft from "./Components/Admin/EditCraft";
 import ManageSubmissions from "./Components/Admin/ManageSubmissions";
