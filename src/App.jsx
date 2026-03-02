@@ -32,7 +32,7 @@ import ResetPassword from "./Components/ResetPassword";
 import AdminDashboard from "./Components/Admin/AdminDashboard";
 import AdminLayout from "./Pages/Layout/AdminLayout";
 import ManageCrafts from "./Components/Admin/ManageCrafts";
-import AddCraft from "./Components/Admin/Addcraft";
+import AddCraft from "./Components/Admin/AddCraftPage";
 import AdminCraftDetails from "./Components/Admin/AdminCraftDetails";
 import EditCraft from "./Components/Admin/EditCraft";
 import ManageSubmissions from "./Components/Admin/ManageSubmissions";
@@ -150,7 +150,7 @@ function App() {
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="crafts" element={<ManageCrafts />} />
-            <Route path="add-craft" element={<AddCraft />} />
+            <Route path="add-craft" element={<AddCraftPage />} />
             <Route path="crafts/:id" element={<AdminCraftDetails />} />
             <Route path="edit-craft/:id" element={<EditCraft />} />
             <Route path="submissions" element={<ManageSubmissions />} />
