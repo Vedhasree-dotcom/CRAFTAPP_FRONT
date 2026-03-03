@@ -95,7 +95,9 @@ export default function FindCraft() {
                 <div className="fc-upload-icon">◎</div>
                 <p className="fc-drop-title">Drop your materials photo</p>
                 <p className="fc-drop-sub">or click to browse</p>
-                <span className="fc-drop-hint">PNG, JPG up to 10MB</span>
+                <span className="fc-drop-hint">PNG, JPG up to 10MB <br/>
+                 File name must include: paint, clay, paper, glue, knitting, home-decor..
+                </span>
               </div>
             )}
           </div>
