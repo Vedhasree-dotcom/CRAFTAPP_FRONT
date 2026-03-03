@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import api from "../Services/api";
 import "./Tutorial.css";
 
 export default function TutorialStep() {
@@ -12,9 +13,8 @@ export default function TutorialStep() {
   useEffect(() => {
     const fetchCraft = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/crafts/${id}`);
-        const data = await res.json();
-        setCraft(data);
+      const res = await api.get(`/crafts/${id}`);
+      setCraft(res.data);
       } catch (err) {
         console.error("Failed to load craft", err);
       } finally {
@@ -40,7 +40,6 @@ export default function TutorialStep() {
   return (
     <div className="tut-page">
 
-      {/* ── HERO HEADER ── */}
       <div className="tut-hero">
         <div className="tut-hero-text">
           <span className="tut-eyebrow">Step-by-Step Tutorial</span>
@@ -65,7 +64,6 @@ export default function TutorialStep() {
 
       <div className="tut-body">
 
-        {/* ── SIDEBAR: PROGRESS ── */}
         <aside className="tut-sidebar">
           <p className="tut-sidebar-label">Progress</p>
           <ul className="tut-progress-list">
@@ -83,7 +81,6 @@ export default function TutorialStep() {
             ))}
           </ul>
 
-          {/* materials in sidebar */}
           <div className="tut-sidebar-materials">
             <p className="tut-sidebar-label" style={{ marginTop: '28px' }}>Materials</p>
             <ul className="tut-mat-list">
@@ -97,10 +94,8 @@ export default function TutorialStep() {
           </div>
         </aside>
 
-        {/* ── MAIN CONTENT ── */}
         <main className="tut-main">
 
-          {/* Steps */}
           <div className="tut-steps">
             {craft.tutorialSteps.map((step, i) => (
               <div
@@ -134,7 +129,6 @@ export default function TutorialStep() {
                     )}
                   </div>
 
-                  {/* step nav */}
                   <div className="tut-step-nav">
                     {i > 0 && (
                       <button className="tut-nav-btn tut-nav-btn--ghost" onClick={e => { e.stopPropagation(); setActiveStep(i - 1); }}>
@@ -152,7 +146,6 @@ export default function TutorialStep() {
             ))}
           </div>
 
-          {/* Video Section */}
           {craft.tutorialVideo && (
             <div className="tut-video-section">
               <span className="tut-eyebrow">Watch &amp; Learn</span>
@@ -176,7 +169,6 @@ export default function TutorialStep() {
             </div>
           )}
 
-          {/* CTA */}
           <div className="tut-cta">
             <div className="tut-cta-text">
               <h2>Ready to show your work?</h2>
