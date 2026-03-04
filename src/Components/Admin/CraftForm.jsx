@@ -167,7 +167,21 @@ export default function CraftForm({ editingCraft, closeForm, refresh }) {
         </div>
 
         <div className="cf-field">
-          <label className="cf-label">Main Craft Image {editingCraft && <span className="cf-hint">(leave blank to keep existing)</span>}</label>
+          <label className="cf-label">
+            Main Craft Image {editingCraft && <span className="cf-hint">(leave blank to keep existing)</span>}
+          </label>
+
+          {editingCraft?.image && !image && (
+            <div className="cf-img-preview">
+              <img
+                src={editingCraft.image.startsWith("http") 
+                  ? editingCraft.image 
+                  : `${import.meta.env.VITE_SERVER_URL}${editingCraft.image}`}
+                alt={editingCraft.title}
+              />
+            </div>
+          )}
+
           <input
             className="cf-file"
             type="file"
@@ -211,13 +225,25 @@ export default function CraftForm({ editingCraft, closeForm, refresh }) {
                 />
               </div>
               <div className="cf-field">
-                <label className="cf-label">Step Image </label>
-                <input
-                  className="cf-file"
-                  type="file"
-                  onChange={(e) => updateStep(index, "imageFile", e.target.files[0])}
-                />
-              </div>
+              <label className="cf-label">Step Image</label>
+
+              {step.image && !step.imageFile && (
+                <div className="cf-img-preview">
+                  <img
+                    src={step.image.startsWith("http")
+                      ? step.image
+                      : `${import.meta.env.VITE_SERVER_URL}${step.image}`}
+                    alt={`Step ${index + 1}`}
+                  />
+                </div>
+              )}
+
+              <input
+                className="cf-file"
+                type="file"
+                onChange={(e) => updateStep(index, "imageFile", e.target.files[0])}
+              />
+            </div>
               <button
                 type="button"
                 className="cf-remove-btn"

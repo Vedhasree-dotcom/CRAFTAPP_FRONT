@@ -74,11 +74,15 @@ export default function AdminCraftDetails() {
             <span className="acd-price">₹{craft.price}</span>
           </div>
         </div>
-        <img
-          src={`${import.meta.env.VITE_SERVER_URL}${craft.image}`}
-          alt={craft.title}
-          className="acd-hero-img"
-        />
+       <img
+        src={
+          craft.image?.startsWith("http")
+            ? craft.image
+            : `${import.meta.env.VITE_SERVER_URL}${craft.image}`
+        }
+        alt={craft.title}
+        className="acd-hero-img"
+      />
       </div>
 
       <div className="acd-details-grid">
@@ -138,9 +142,13 @@ export default function AdminCraftDetails() {
                 <div className="acd-step-body">
                   <h4>{step.title}</h4>
                   <p>{step.description}</p>
-                  {step.image && (
+                 {step.image && (
                     <img
-                      src={`${import.meta.env.VITE_SERVER_URL}${step.image}`}
+                      src={
+                        step.image.startsWith("http")
+                          ? step.image
+                          : `${import.meta.env.VITE_SERVER_URL}${step.image}`
+                      }
                       alt={step.title}
                       className="acd-step-img"
                     />

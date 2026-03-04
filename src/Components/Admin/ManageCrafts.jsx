@@ -65,7 +65,11 @@ export default function ManageCrafts() {
             >
               <div className="mc-card-img-wrap">
                 <img
-                  src={`${import.meta.env.VITE_SERVER_URL}${craft.image}`}
+                  src={
+                    craft.image?.startsWith("http")
+                      ? craft.image
+                      : `${import.meta.env.VITE_SERVER_URL}${craft.image}`
+                  }
                   alt={craft.title}
                   className="mc-card-img"
                 />

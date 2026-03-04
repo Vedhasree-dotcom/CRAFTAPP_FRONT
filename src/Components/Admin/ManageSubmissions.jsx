@@ -116,7 +116,11 @@ export default function ManageSubmissions() {
             <div className="ms-card" key={sub._id}>
               <div className="ms-card-img-wrap">
                 <img
-                  src={`${import.meta.env.VITE_SERVER_URL}${sub.images[0]}`}
+                  src={
+                    sub.images[0]?.startsWith("http")
+                      ? sub.images[0]
+                      : `${import.meta.env.VITE_SERVER_URL}${sub.images[0]}`
+                  }
                   alt="submission"
                   className="ms-card-img"
                 />
