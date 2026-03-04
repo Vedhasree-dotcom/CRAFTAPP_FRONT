@@ -58,7 +58,13 @@ function Paper() {
                   className="cc2-pin"
                 >
                   <img
-                    src={`${import.meta.env.VITE_SERVER_URL}${craft.image}` || "https://via.placeholder.com/300x200"}
+                    src={
+                      craft.image
+                        ? craft.image.startsWith("http")
+                          ? craft.image
+                          : `${import.meta.env.VITE_SERVER_URL}${craft.image}`
+                        : "https://via.placeholder.com/300x200"
+                    }
                     alt={craft.title}
                     className="cc2-pin-img"
                   />

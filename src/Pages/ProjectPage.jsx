@@ -66,7 +66,13 @@ function ProjectPage() {
                   className={`pp-pin ${i % 5 === 0 ? 'pp-pin--tall' : ''}`}
                 >
                   <img
-                    src={`${SERVER_URL.replace(/\/$/, "")}${project.images?.[0]}`}
+                    src={
+                      project.images && project.images.length > 0
+                        ? project.images[0].startsWith("http")
+                          ? project.images[0]
+                          : `${SERVER_URL.replace(/\/$/, "")}${project.images[0]}`
+                        : "https://via.placeholder.com/300x200"
+                    }
                     alt="craft"
                     className="pp-pin-img"
                   />

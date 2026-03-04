@@ -63,11 +63,16 @@ function Homedecor() {
                   className="cc2-pin"
                 >
                   <img
-                    src={`${import.meta.env.VITE_SERVER_URL}${craft.image}` || "https://via.placeholder.com/300x200"}
+                    src={
+                      craft.image
+                        ? craft.image.startsWith("http")
+                          ? craft.image
+                          : `${import.meta.env.VITE_SERVER_URL}${craft.image}`
+                        : "https://via.placeholder.com/300x200"
+                    }
                     alt={craft.title}
                     className="cc2-pin-img"
                   />
-
                   <div className="cc2-category-badge">Home Decor</div>
 
                   <div className="cc2-pin-body">

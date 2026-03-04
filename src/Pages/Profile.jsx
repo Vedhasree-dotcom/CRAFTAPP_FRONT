@@ -124,7 +124,13 @@ function Profile() {
                   >
                     <button className="pf-save-btn" onClick={e => e.preventDefault()}>Saved ❤️</button>
                     <img
-                      src={`${import.meta.env.VITE_SERVER_URL}${craft.image}`}
+                      src={
+                        craft.image
+                          ? craft.image.startsWith("http")
+                            ? craft.image
+                            : `${import.meta.env.VITE_SERVER_URL}${craft.image}`
+                          : "https://via.placeholder.com/300x200"
+                      }
                       alt={craft.title}
                       className="pf-pin-img"
                     />
@@ -158,8 +164,14 @@ function Profile() {
                     key={sub._id}
                     className={`pf-pin pf-pin--sub ${i % 5 === 0 ? 'pf-pin--tall' : ''}`}
                   >
-                    <img
-                      src={`${import.meta.env.VITE_SERVER_URL}${sub.images[0]}`}
+                   <img
+                      src={
+                        sub.images && sub.images.length > 0
+                          ? sub.images[0].startsWith("http")
+                            ? sub.images[0]
+                            : `${import.meta.env.VITE_SERVER_URL}${sub.images[0]}`
+                          : "https://via.placeholder.com/300x200"
+                      }
                       alt="submission"
                       className="pf-pin-img"
                     />

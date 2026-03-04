@@ -76,7 +76,11 @@ export default function AllCrafts() {
               <span className="ac-badge">{craft.category}</span>
 
               <img
-                src={`${import.meta.env.VITE_SERVER_URL}${craft.image}` || "https://images.pexels.com/photos/7606010/pexels-photo-7606010.jpeg"}
+                src={
+                  craft.image?.startsWith("http")
+                    ? craft.image
+                    : `${import.meta.env.VITE_SERVER_URL}${craft.image}`
+                }
                 alt={craft.title}
                 className="ac-pin-img"
               />

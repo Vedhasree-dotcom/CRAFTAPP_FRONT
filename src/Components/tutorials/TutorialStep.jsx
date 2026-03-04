@@ -121,7 +121,11 @@ export default function TutorialStep() {
                     {step.image && (
                       <div className="tut-step-img-wrap">
                         <img
-                          src={`${import.meta.env.VITE_SERVER_URL}${step.image}`}
+                          src={
+                            step.image.startsWith("http")
+                              ? step.image
+                              : `${import.meta.env.VITE_SERVER_URL}${step.image}`
+                          }
                           alt={step.title}
                           className="tut-step-img"
                         />

@@ -62,12 +62,15 @@ function CraftDetails() {
 
         <div className="cd-image-col">
           <div className="cd-image-wrap">
-            <img
-              src={`${import.meta.env.VITE_SERVER_URL}${craft.image}` || "https://images.pexels.com/photos/7606010/pexels-photo-7606010.jpeg"}
+           <img
+              src={
+                craft.image?.startsWith("http")
+                  ? craft.image
+                  : `${import.meta.env.VITE_SERVER_URL}${craft.image}`
+              }
               alt={craft.title}
               className="cd-image"
             />
-           
           </div>
 
           <div className="cd-image-caption">

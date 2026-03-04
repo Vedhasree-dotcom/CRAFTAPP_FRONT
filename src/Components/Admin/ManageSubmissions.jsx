@@ -102,7 +102,6 @@ export default function ManageSubmissions() {
         </div>
       )}
 
-      {/* empty */}
       {!loading && submissions.length === 0 && (
         <div className="ms-idle">
           <span className="ms-idle-icon">✦</span>
