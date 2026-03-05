@@ -22,6 +22,8 @@ export default function Register() {
     else if (!form.email.includes("@")) errs.email = "Invalid email";
     if (!form.password) errs.password = "Password is required";
     else if (form.password.length < 6) errs.password = "Password must be at least 6 characters";
+    if (!form.phone) errs.phone = "Phone is required";
+    else if (!/^\+\d{10,15}$/.test(form.phone)) errs.phone = "Use E.164 format e.g. +911234567890";
     return errs;
   };
 
@@ -116,15 +118,16 @@ export default function Register() {
             </div>
 
             <div className="rg-field">
-              <label className="rg-label">Phone <span className="rg-optional">(optional)</span></label>
+              <label className="rg-label">Phone</label> 
               <input
-                className="rg-input"
-                name="phone"
-                type="tel"
-                placeholder="+91 00000 00000"
-                onChange={(e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))}
+                  className={`rg-input ${submitted && errs.phone ? 'rg-input--error' : ''}`}
+                  name="phone"
+                  type="tel"
+                  placeholder="+911234567890"
+                  onChange={(e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))}
               />
-            </div>
+              {submitted && errs.phone && <span className="rg-error">✕ {errs.phone}</span>}
+          </div>
 
             <button type="submit" className="rg-submit">
               Create Account →
