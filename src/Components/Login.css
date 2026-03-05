@@ -1,25 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
 
-.lg-page {
-  font-family: 'DM Sans', sans-serif;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
-  height: 100%;
-  background: #f5f0eb;
-  color: #2a1f14;
-  position: relative;
-}
-
-body, #root {
-  min-height: 100vh;
-  background: #f5f0eb !important;
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html, body, #root {
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+  background: #f5f0eb !important;
+}
+
+
+.lg-page {
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  width: 100%;
+  background: #f5f0eb;
+  color: #2a1f14;
+}
+
 
 .lg-left {
+  flex: 1;
   background: #2a1f14;
   position: relative;
   overflow: hidden;
@@ -27,6 +33,7 @@ body, #root {
   align-items: center;
   justify-content: center;
   padding: 60px 56px;
+  min-height: 100vh;
 }
 
 .lg-left::before {
@@ -35,11 +42,11 @@ body, #root {
   inset: 0;
   background-image: repeating-linear-gradient(
     -45deg,
-    transparent,
-    transparent 40px,
+    transparent, transparent 40px,
     rgba(232,200,154,0.04) 40px,
     rgba(232,200,154,0.04) 41px
   );
+  pointer-events: none;
 }
 
 .lg-left::after {
@@ -51,6 +58,7 @@ body, #root {
   height: 420px;
   border-radius: 50%;
   border: 1px solid rgba(232,200,154,0.06);
+  pointer-events: none;
 }
 
 .lg-left-inner {
@@ -64,6 +72,11 @@ body, #root {
   justify-content: space-between;
 }
 
+.lg-brand-group {
+  display: flex;
+  flex-direction: column;
+}
+
 .lg-brand {
   font-family: 'Playfair Display', serif;
   font-size: 36px;
@@ -73,7 +86,6 @@ body, #root {
   letter-spacing: -0.5px;
   transition: opacity 0.2s;
 }
-
 .lg-brand:hover { opacity: 0.85; }
 
 .lg-brand-tag {
@@ -97,7 +109,6 @@ body, #root {
   background: rgba(232,200,154,0.06);
   border: 1px solid rgba(232,200,154,0.08);
 }
-
 .lg-pin-1 { height: 120px; }
 .lg-pin-2 { height: 80px;  width: 75%; }
 .lg-pin-3 { height: 100px; width: 85%; }
@@ -112,18 +123,19 @@ body, #root {
 
 
 .lg-right {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px 64px;
+  padding: 60px 48px;
   background: #f5f0eb;
   min-height: 100vh;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .lg-form-wrap {
   width: 100%;
-  max-width: 480px;
+  max-width: 460px;
 }
 
 .lg-eyebrow {
@@ -145,11 +157,7 @@ body, #root {
   line-height: 1.05;
   margin-bottom: 10px;
 }
-
-.lg-title em {
-  font-style: italic;
-  color: #b07d3a;
-}
+.lg-title em { font-style: italic; color: #b07d3a; }
 
 .lg-subtitle {
   font-size: 14px;
@@ -176,12 +184,15 @@ body, #root {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
 }
 
 .lg-field {
   display: flex;
   flex-direction: column;
   gap: 7px;
+  width: 100%;
+  min-width: 0;
 }
 
 .lg-label {
@@ -193,7 +204,9 @@ body, #root {
 }
 
 .lg-input {
+  display: block;
   width: 100%;
+  min-width: 0;
   padding: 14px 18px;
   background: #fff;
   border: 1.5px solid rgba(176,125,58,0.18);
@@ -202,36 +215,26 @@ body, #root {
   font-size: 14px;
   color: #2a1f14;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(42,31,20,0.04);
+  transition: border-color 0.2s;
 }
-
 .lg-input::placeholder { color: #c9b49a; }
-
 .lg-input:focus {
   border-color: #b07d3a;
-  box-shadow: 0 0 0 3px rgba(176,125,58,0.1);
+  border-width: 2px;
 }
-
-.lg-input--error {
-  border-color: rgba(200,50,50,0.5);
-}
-
-.lg-input--error:focus {
-  box-shadow: 0 0 0 3px rgba(200,50,50,0.08);
-}
+.lg-input--error       { border-color: rgba(200,50,50,0.5); }
+.lg-input--error:focus { border-color: #c03232; border-width: 2px; }
 
 .lg-password-wrap {
   position: relative;
+  width: 100%;
+  min-width: 0;
 }
-
-.lg-password-wrap .lg-input {
-  padding-right: 48px;
-}
+.lg-password-wrap .lg-input { padding-right: 46px; }
 
 .lg-eye {
   position: absolute;
-  right: 14px;
+  right: 13px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
@@ -243,15 +246,11 @@ body, #root {
   align-items: center;
   padding: 4px;
   transition: color 0.2s;
+  flex-shrink: 0;
 }
-
 .lg-eye:hover { color: #b07d3a; }
 
-.lg-error {
-  font-size: 12px;
-  color: #c03232;
-  font-weight: 500;
-}
+.lg-error { font-size: 12px; color: #c03232; font-weight: 500; }
 
 .lg-forgot-row {
   display: flex;
@@ -266,7 +265,6 @@ body, #root {
   font-weight: 500;
   transition: color 0.2s;
 }
-
 .lg-link:hover { color: #2a1f14; }
 
 .lg-submit {
@@ -283,29 +281,15 @@ body, #root {
   cursor: pointer;
   transition: opacity 0.2s, transform 0.2s;
 }
-
-.lg-submit:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-}
+.lg-submit:hover { opacity: 0.9; transform: translateY(-2px); }
 
 .lg-divider {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
-.lg-divider span {
-  flex: 1;
-  height: 1px;
-  background: rgba(176,125,58,0.15);
-}
-
-.lg-divider p {
-  font-size: 12px;
-  color: #9a8272;
-  white-space: nowrap;
-}
+.lg-divider span { flex: 1; height: 1px; background: rgba(176,125,58,0.15); }
+.lg-divider p    { font-size: 12px; color: #9a8272; white-space: nowrap; }
 
 .lg-signup-btn {
   width: 100%;
@@ -322,7 +306,6 @@ body, #root {
   text-decoration: none;
   transition: background 0.2s, border-color 0.2s, transform 0.2s;
 }
-
 .lg-signup-btn:hover {
   background: #2a1f14;
   color: #e8c89a;
@@ -331,14 +314,22 @@ body, #root {
 }
 
    /* RESPONSIVE */
+
+@media (max-width: 1024px) {
+  .lg-left  { padding: 56px 44px; }
+  .lg-right { padding: 56px 40px; }
+  .lg-title { font-size: 38px; }
+}
+
 @media (max-width: 900px) {
-  .lg-page {
-    grid-template-columns: 1fr;
-  }
+  .lg-page { flex-direction: column; }
 
   .lg-left {
-    padding: 48px 40px 40px;
-    min-height: 220px;
+    flex: none;
+    width: 100%;
+    min-height: unset;
+    height: auto;
+    padding: 28px 24px;
   }
 
   .lg-left-inner {
@@ -346,39 +337,70 @@ body, #root {
     align-items: center;
     justify-content: space-between;
     height: auto;
+    gap: 12px;
   }
 
   .lg-decor-pins { display: none; }
+  .lg-brand-tag  { display: none; }
 
   .lg-left-footer p {
     font-size: 13px;
     text-align: right;
-    max-width: 220px;
+    max-width: 200px;
+    margin: 0;
   }
 
   .lg-right {
-    padding: 48px 32px 60px;
-    background: #f5f0eb;
+    flex: 1;
+    width: 100%;
+    min-height: unset;
+    padding: 44px 32px 56px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .lg-form-wrap {
+    width: 100%;
+    max-width: 500px;
   }
 }
 
-@media (max-width: 600px) {
-  .lg-left {
-    padding: 32px 24px;
-  }
-
-  .lg-left-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
+@media (max-width: 640px) {
+  .lg-left { padding: 22px 20px; }
+  .lg-left-inner { flex-direction: column; align-items: flex-start; gap: 2px; }
   .lg-left-footer { display: none; }
+  .lg-brand { font-size: 26px; }
 
-  .lg-right {
-    padding: 36px 20px 52px;
-    background: #f5f0eb;
-  }
+  /* 20px side padding = safe on all phones, inputs won't touch edges */
+  .lg-right { padding: 36px 20px 52px; }
+  .lg-form-wrap { max-width: 100%; }
 
-  .lg-title { font-size: 36px; }
+  .lg-title    { font-size: 32px; }
+  .lg-subtitle { font-size: 13px; margin-bottom: 20px; }
+  .lg-input    { padding: 13px 15px; font-size: 14px; }
+  .lg-password-wrap .lg-input { padding-right: 44px; }
+  .lg-submit   { padding: 14px; font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .lg-left  { padding: 20px 16px; }
+  .lg-right { padding: 32px 20px 48px; }
+
+  .lg-brand   { font-size: 24px; }
+  .lg-title   { font-size: 28px; }
+  .lg-eyebrow { font-size: 10px; letter-spacing: 2px; }
+  .lg-label   { font-size: 10px; letter-spacing: 1.5px; }
+  .lg-input   { padding: 13px 14px; font-size: 14px; border-radius: 10px; }
+  .lg-password-wrap .lg-input { padding-right: 42px; }
+  .lg-submit  { padding: 14px; font-size: 14px; }
+  .lg-error   { font-size: 11px; }
+  .lg-subtitle { margin-bottom: 18px; }
+}
+
+@media (max-width: 360px) {
+  .lg-left  { padding: 16px 14px; }
+  .lg-right { padding: 28px 16px 40px; }
+  .lg-brand { font-size: 22px; }
+  .lg-title { font-size: 24px; }
+  .lg-input { padding: 12px 13px; font-size: 13px; }
 }
