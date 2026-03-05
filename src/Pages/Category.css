@@ -7,9 +7,7 @@
   min-height: 100vh;
 }
 
-/* ══════════════════════════════
-   HEADER
-══════════════════════════════ */
+
 .cc2-header {
   max-width: 1200px;
   margin: 0 auto;
@@ -37,18 +35,14 @@
   line-height: 1.7;
 }
 
-/* ══════════════════════════════
-   BODY
-══════════════════════════════ */
+
 .cc2-body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 44px 80px 80px;
 }
 
-/* ══════════════════════════════
-   IDLE / LOADING
-══════════════════════════════ */
+
 .cc2-idle {
   display: flex;
   flex-direction: column;
@@ -86,9 +80,7 @@
   line-height: 1.6;
 }
 
-/* ══════════════════════════════
-   GRID  — display: grid
-══════════════════════════════ */
+
 .cc2-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -96,9 +88,7 @@
   width: 100%;
 }
 
-/* ══════════════════════════════
-   PIN CARD
-══════════════════════════════ */
+
 .cc2-pin {
   border-radius: 18px;
   overflow: hidden;
@@ -201,9 +191,7 @@
   transform: translateY(-1px);
 }
 
-/* ══════════════════════════════
-   RESPONSIVE
-══════════════════════════════ */
+   /* RESPONSIVE */
 
 @media (max-width: 1024px) {
   .cc2-header { padding: 32px 48px 0; }
@@ -224,7 +212,6 @@
   .cc2-header h1 { font-size: 24px; }
   .cc2-header p  { font-size: 13px; }
   .cc2-body   { padding: 20px 0 48px; }
-  /* Always 2 columns on mobile */
   .cc2-grid   { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .cc2-pin    { border-radius: 14px; }
   .cc2-pin-img { height: 160px; }
