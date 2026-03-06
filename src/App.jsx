@@ -112,8 +112,19 @@ function App() {
           }
         />
 
-        <Route path="/crafts/:id/tutorial" element={<TutorialStep />} />
-        <Route path="/submit-project" element={<SubmitProject />} />
+        <Route
+          path="/crafts/:id/tutorial"
+          element={
+            <ProtectedRoute>
+              <TutorialStep />
+            </ProtectedRoute>
+          }/>        
+
+        <Route path="/submit-project" element={
+          <ProtectedRoute>
+            <SubmitProject/>
+          </ProtectedRoute>} />
+
         <Route path="community-projects" element={
           <ProtectedRoute>
             <ProjectPage />
@@ -128,9 +139,15 @@ function App() {
           }
         />
 
-        <Route path="/payment/:craftId" element={<PaymentPage />} />
+        <Route path="/payment/:craftId" element={
+          <ProtectedRoute>
+            <PaymentPage />
+          </ProtectedRoute>} />
 
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <Profile/>
+          </ProtectedRoute>} />
 
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
