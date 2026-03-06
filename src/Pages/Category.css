@@ -201,16 +201,16 @@
   .cc2-header { padding: 28px 24px 0; }
   .cc2-header h1 { font-size: 28px; }
   .cc2-body   { padding: 24px 24px 52px; }
-  .cc2-grid   { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .cc2-grid   {display: flex; flex-direction: column; gap: 12px; }
 }
 
 @media (max-width: 600px) {
-  .cc2-page   { padding: 0 12px; }
+  .cc2-page   { padding: 0 14px; }
   .cc2-header { padding: 24px 0 0; }
   .cc2-header h1 { font-size: 24px; }
   .cc2-header p  { font-size: 13px; }
   .cc2-body   { padding: 20px 0 48px; }
-  .cc2-grid   { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .cc2-grid   {display: flex; flex-direction: column; gap: 12px; }
   .cc2-pin    { border-radius: 14px; }
   .cc2-pin-img { height: 160px; }
   .cc2-pin-body { padding: 10px 12px 12px; }
