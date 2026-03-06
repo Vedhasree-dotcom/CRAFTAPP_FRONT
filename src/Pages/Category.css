@@ -35,7 +35,6 @@
   line-height: 1.7;
 }
 
-
 .cc2-body {
   max-width: 1200px;
   margin: 0 auto;
@@ -79,7 +78,6 @@
   max-width: 280px;
   line-height: 1.6;
 }
-
 
 .cc2-grid {
   display: grid;
@@ -212,7 +210,7 @@
   .cc2-header h1 { font-size: 24px; }
   .cc2-header p  { font-size: 13px; }
   .cc2-body   { padding: 20px 0 48px; }
-  .cc2-grid   { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .cc2-grid   { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .cc2-pin    { border-radius: 14px; }
   .cc2-pin-img { height: 160px; }
   .cc2-pin-body { padding: 10px 12px 12px; }
@@ -226,7 +224,7 @@
   .cc2-page   { padding: 0 14px; }
   .cc2-header { padding: 20px 0 0; }
   .cc2-body   { padding: 16px 0 44px; }
-  .cc2-grid   { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .cc2-grid   { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .cc2-pin-img { height: 140px; }
   .cc2-idle h3 { font-size: 22px; }
   .cc2-idle p  { font-size: 13px; }
@@ -235,6 +233,6 @@
 @media (max-width: 360px) {
   .cc2-page   { padding: 0 12px; }
   .cc2-header h1 { font-size: 20px; }
-  .cc2-grid   { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .cc2-grid   { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .cc2-pin-img { height: 120px; }
 }

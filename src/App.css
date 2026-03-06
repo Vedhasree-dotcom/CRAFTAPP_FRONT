@@ -4157,9 +4157,7 @@ body, #root {
   margin-bottom: 12px;
 }
 
-/* ══════════════════════════════
-   HERO
-══════════════════════════════ */
+
 .pp-hero {
   background: #2a1f14;
   padding: 64px 80px 56px;
@@ -4211,18 +4209,14 @@ body, #root {
   line-height: 1.7;
 }
 
-/* ══════════════════════════════
-   BODY
-══════════════════════════════ */
+
 .pp-body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 48px 80px 80px;
 }
 
-/* ══════════════════════════════
-   IDLE / LOADING
-══════════════════════════════ */
+
 .pp-idle {
   display: flex;
   flex-direction: column;
@@ -4255,9 +4249,7 @@ body, #root {
 
 .pp-idle p { font-size: 14px; color: #9a8272; max-width: 280px; line-height: 1.6; }
 
-/* ══════════════════════════════
-   COUNT ROW
-══════════════════════════════ */
+
 .pp-count {
   margin-bottom: 32px;
   padding-bottom: 20px;
@@ -4272,9 +4264,7 @@ body, #root {
   letter-spacing: -0.5px;
 }
 
-/* ══════════════════════════════
-   GRID — display: grid (uniform sizes)
-══════════════════════════════ */
+
 .pp-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -4282,9 +4272,7 @@ body, #root {
   width: 100%;
 }
 
-/* ══════════════════════════════
-   PIN CARD
-══════════════════════════════ */
+
 .pp-pin {
   border-radius: 18px;
   overflow: hidden;
@@ -4292,7 +4280,6 @@ body, #root {
   box-shadow: 0 2px 12px rgba(42,31,20,0.07);
   border: 1px solid rgba(176,125,58,0.08);
   position: relative;
-  /* flex column so footer always sticks to bottom */
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -4303,7 +4290,6 @@ body, #root {
   box-shadow: 0 14px 36px rgba(42,31,20,0.13);
 }
 
-/* Fixed height image — same on every card */
 .pp-pin-img {
   width: 100%;
   height: 200px;
@@ -4313,7 +4299,6 @@ body, #root {
   transition: transform 0.5s ease;
 }
 
-/* Remove tall variant — grid keeps everything uniform */
 .pp-pin:hover .pp-pin-img { transform: scale(1.04); }
 
 .pp-like-btn {
@@ -4393,9 +4378,7 @@ body, #root {
   white-space: nowrap;
 }
 
-/* ══════════════════════════════
-   RESPONSIVE
-══════════════════════════════ */
+   /* RESPONSIVE */
 
 @media (max-width: 1024px) {
   .pp-hero { padding: 56px 48px 48px; }
