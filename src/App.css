@@ -4157,6 +4157,9 @@ body, #root {
   margin-bottom: 12px;
 }
 
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
 .pp-hero {
   background: #2a1f14;
   padding: 64px 80px 56px;
@@ -4186,14 +4189,11 @@ body, #root {
   background: linear-gradient(90deg, transparent, rgba(232,200,154,0.2), transparent);
 }
 
-.pp-hero-inner {
-  position: relative;
-  z-index: 1;
-}
+.pp-hero-inner { position: relative; z-index: 1; }
 
 .pp-hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(32px, 5vw, 58px);
+  font-size: clamp(28px, 5vw, 58px);
   font-weight: 700;
   color: #fff;
   letter-spacing: -1px;
@@ -4201,10 +4201,7 @@ body, #root {
   margin-bottom: 16px;
 }
 
-.pp-hero h1 em {
-  font-style: italic;
-  color: #e8c89a;
-}
+.pp-hero h1 em { font-style: italic; color: #e8c89a; }
 
 .pp-hero p {
   font-size: 15px;
@@ -4214,12 +4211,18 @@ body, #root {
   line-height: 1.7;
 }
 
+/* ══════════════════════════════
+   BODY
+══════════════════════════════ */
 .pp-body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 48px 80px 80px;
 }
 
+/* ══════════════════════════════
+   IDLE / LOADING
+══════════════════════════════ */
 .pp-idle {
   display: flex;
   flex-direction: column;
@@ -4252,6 +4255,9 @@ body, #root {
 
 .pp-idle p { font-size: 14px; color: #9a8272; max-width: 280px; line-height: 1.6; }
 
+/* ══════════════════════════════
+   COUNT ROW
+══════════════════════════════ */
 .pp-count {
   margin-bottom: 32px;
   padding-bottom: 20px;
@@ -4266,20 +4272,29 @@ body, #root {
   letter-spacing: -0.5px;
 }
 
+/* ══════════════════════════════
+   GRID — display: grid (uniform sizes)
+══════════════════════════════ */
 .pp-grid {
-  columns: 4;
-  column-gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
 }
 
+/* ══════════════════════════════
+   PIN CARD
+══════════════════════════════ */
 .pp-pin {
-  break-inside: avoid;
-  margin-bottom: 16px;
   border-radius: 18px;
   overflow: hidden;
   background: #fff;
   box-shadow: 0 2px 12px rgba(42,31,20,0.07);
   border: 1px solid rgba(176,125,58,0.08);
   position: relative;
+  /* flex column so footer always sticks to bottom */
+  display: flex;
+  flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -4288,15 +4303,17 @@ body, #root {
   box-shadow: 0 14px 36px rgba(42,31,20,0.13);
 }
 
+/* Fixed height image — same on every card */
 .pp-pin-img {
   width: 100%;
-  height: 210px;
+  height: 200px;
   object-fit: cover;
   display: block;
+  flex-shrink: 0;
   transition: transform 0.5s ease;
 }
 
-.pp-pin--tall .pp-pin-img { height: 290px; }
+/* Remove tall variant — grid keeps everything uniform */
 .pp-pin:hover .pp-pin-img { transform: scale(1.04); }
 
 .pp-like-btn {
@@ -4318,21 +4335,22 @@ body, #root {
   z-index: 2;
 }
 
-.pp-pin:hover .pp-like-btn {
-  opacity: 1;
-  transform: scale(1);
-}
-
+.pp-pin:hover .pp-like-btn { opacity: 1; transform: scale(1); }
 .pp-like-btn:hover { background: #c0001d; }
 
-.pp-pin-body { padding: 14px 16px 16px; }
+.pp-pin-body {
+  padding: 14px 16px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 
 .pp-desc {
   font-size: 13px;
   color: #6b5240;
   line-height: 1.6;
   margin-bottom: 12px;
-  overflow: hidden;
+  flex: 1;
 }
 
 .pp-pin-footer {
@@ -4340,6 +4358,7 @@ body, #root {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  margin-top: auto;
 }
 
 .pp-creator {
@@ -4374,32 +4393,47 @@ body, #root {
   white-space: nowrap;
 }
 
-/* ── RESPONSIVE ── */
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+
 @media (max-width: 1024px) {
-  .pp-body { padding: 40px 48px 64px; }
   .pp-hero { padding: 56px 48px 48px; }
-  .pp-grid { columns: 3; }
+  .pp-body { padding: 40px 48px 64px; }
+  .pp-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
 }
 
 @media (max-width: 768px) {
   .pp-hero { padding: 48px 24px 40px; }
   .pp-body { padding: 32px 24px 56px; }
-  .pp-grid { columns: 2; column-gap: 12px; }
+  .pp-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .pp-count h2 { font-size: 26px; }
+  .pp-hero p { font-size: 14px; }
+}
+
+@media (max-width: 600px) {
+  .pp-hero { padding: 40px 16px 32px; }
+  .pp-body { padding: 24px 16px 48px; }
+  .pp-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .pp-pin-img { height: 160px; }
+  .pp-pin-body { padding: 10px 12px 12px; }
+  .pp-desc { font-size: 12px; margin-bottom: 8px; }
+  .pp-count h2 { font-size: 22px; }
 }
 
 @media (max-width: 480px) {
-  .pp-hero { padding: 40px 16px 32px; }
-  .pp-body { padding: 24px 16px 48px; }
-  .pp-grid { columns: 2; column-gap: 10px; }
-  .pp-pin-img { height: 160px; }
-  .pp-pin--tall .pp-pin-img { height: 220px; }
-  .pp-pin-body { padding: 10px 12px 12px; }
-  .pp-desc { font-size: 12px; }
+  .pp-body { padding: 20px 14px 44px; }
+  .pp-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .pp-pin-img { height: 140px; }
+  .pp-pin    { border-radius: 14px; }
+  .pp-idle h3 { font-size: 22px; }
+  .pp-idle p  { font-size: 13px; }
 }
 
 @media (max-width: 360px) {
-  .pp-grid { columns: 1; }
+  .pp-body { padding: 16px 12px 40px; }
+  .pp-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .pp-pin-img { height: 120px; }
 }
 
 /* ................Profile............... */
