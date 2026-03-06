@@ -205,7 +205,7 @@
 }
 
 @media (max-width: 600px) {
-  .cc2-page   { padding: 0 16px; }
+  .cc2-page   { padding: 0 12px; }
   .cc2-header { padding: 24px 0 0; }
   .cc2-header h1 { font-size: 24px; }
   .cc2-header p  { font-size: 13px; }
