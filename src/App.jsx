@@ -23,6 +23,7 @@ import Clay from "./Pages/Clay";
 
 import FindCraft from "./Pages/FindCraft";
 import Profile from "./Pages/Profile";
+import ProfileEdit from "./Pages/ProfileEdit";
 import Register from "./Components/Register";
 import Login from "./Components/Login";
 import VerifyOTP from "./Components/VerifyOtp";
@@ -147,6 +148,11 @@ function App() {
         <Route path="/profile" element={
           <ProtectedRoute>
             <Profile/>
+          </ProtectedRoute>} />
+
+        <Route path="/edit-profile" element={
+          <ProtectedRoute>
+            <ProfileEdit />
           </ProtectedRoute>} />
 
         <Route path="/register" element={<Register />} />

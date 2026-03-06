@@ -9,12 +9,32 @@ function CraftDetails() {
   const navigate = useNavigate();
   const [craft, setCraft] = useState(null);
   const [saved, setSaved] = useState(false);
+  const [purchased, setPurchased] = useState(false);
 
   useEffect(() => {
-    api.get(`/crafts/${id}`)
-      .then(res => setCraft(res.data))
-      .catch(err => console.error(err));
-  }, [id]);
+  const fetchData = async () => {
+    try {
+      const craftRes = await api.get(`/crafts/${id}`);
+      setCraft(craftRes.data);
+
+      const purchaseRes = await api.get(`/payments/check-purchase/${id}`);
+      setPurchased(purchaseRes.data.purchased);
+
+      const profileRes = await api.get("/user/profile");
+
+      const isSaved = profileRes.data.user.savedCrafts.some(
+        (c) => c._id === id
+      );
+
+      setSaved(isSaved);
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchData();
+}, [id]);
 
   if (!craft) return (
     <div className="cd-loading">
@@ -108,10 +128,13 @@ function CraftDetails() {
                 </li>
               ))}
             </ul>
-            <div className="cd-locked">
-              <span className="cd-lock-icon">🔒</span>
-              <p>Full materials list &amp; step-by-step tutorial unlocked after purchase</p>
-            </div>
+            {!purchased && (
+              <div className="cd-locked">
+                <span className="cd-lock-icon">🔒</span>
+                <p>Full materials list & step-by-step tutorial unlocked after purchase</p>
+              </div>
+            )}
+            
           </div>
 
           <div className="cd-actions">
@@ -121,8 +144,9 @@ function CraftDetails() {
             >
               {saved ? '❤️ Saved!' : '♡ Save Craft'}
             </button>
+
             <button className="cd-btn-tutorial" onClick={handleTutorialClick}>
-              View Tutorial 🔒
+              {purchased ? "View Tutorial" : "View Tutorial 🔒"}
             </button>
           </div>
 

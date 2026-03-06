@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../Services/api";
 
 function Profile() {
   const [userData, setUserData] = useState(null);
   const [submissions, setSubmissions] = useState([]);
+  const [purchases, setPurchases] = useState([]);
   const [activeTab, setActiveTab] = useState("saved");
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProfile();
@@ -17,6 +20,7 @@ function Profile() {
       const res = await api.get("/user/profile");
       setUserData(res.data.user);
       setSubmissions(res.data.submissions);
+      setPurchases(res.data.purchases);
     } catch (err) {
       console.error(err);
     } finally {
@@ -38,6 +42,7 @@ function Profile() {
   const tabConfig = [
     { key: "saved",       label: "Saved Crafts",     icon: "❋" },
     { key: "submissions", label: "Submissions",       icon: "◈" },
+    { key: "purchases",   label: "Purchases",           icon: "🛒" },   
     { key: "about",       label: "About",             icon: "◎" },
   ];
 
@@ -68,7 +73,11 @@ function Profile() {
         </div>
 
         <div className="pf-header-actions">
-          <button className="pf-btn-contact">Get in touch</button>
+          <button
+            className="pf-btn-contact"
+            onClick={() => navigate("/edit-profile")}>
+            Edit Profile
+          </button>        
         </div>
 
       </div>
@@ -192,6 +201,50 @@ function Profile() {
           </>
         )}
 
+        {activeTab === "purchases" && (
+          <>
+            {purchases.length === 0 ? (
+              <div className="pf-empty">
+                <span className="pf-empty-icon">🛍️</span>
+                <h3>No purchases yet</h3>
+                <p>Buy a craft tutorial to see it here.</p>
+                <Link to="/crafts" className="pf-empty-btn">Browse Crafts</Link>
+              </div>
+            ) : (
+              <div className="pf-grid">
+                {purchases.map((p, i) => (
+                  <Link
+                    to={`/crafts/${p.craftId?._id}`}
+                    key={p._id}
+                    className={`pf-pin ${i % 4 === 0 ? "pf-pin--tall" : ""}`}
+                  >
+                    <img
+                      src={
+                        p.craftId?.image
+                          ? p.craftId.image.startsWith("http")
+                            ? p.craftId.image
+                            : `${import.meta.env.VITE_SERVER_URL}${p.craftId.image}`
+                          : "https://via.placeholder.com/300x200"
+                      }
+                      alt={p.craftId?.title}
+                      className="pf-pin-img"
+                    />
+
+                    <div className="pf-pin-body">
+                      <h4>{p.craftId?.title}</h4>
+
+                      <div className="pf-pin-footer">
+                        <span className="pf-price">₹{p.amount}</span>
+                        <span className="pf-arrow">↗</span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
         {activeTab === "about" && (
           <div className="pf-about">
             <div className="pf-about-card">
@@ -234,6 +287,10 @@ function Profile() {
                 <div className="pf-about-stat">
                   <span>{submissions.length}</span>
                   <p>Projects Shared</p>
+                </div>
+                <div className="pf-about-stat">
+                  <span>{purchases.length}</span>
+                  <p>Crafts Purchased</p>
                 </div>
                 <div className="pf-about-stat">
                   <span>{totalLikes}</span>

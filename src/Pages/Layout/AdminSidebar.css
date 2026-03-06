@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
 
+
 .as-mobile-bar {
   display: none;
   position: fixed;
@@ -66,16 +67,20 @@
 
 .as-sidebar {
   width: 260px;
-  min-height: 100vh;
   background: #1e2d4a;
   display: flex;
   flex-direction: column;
   padding: 0;
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  height: 100vh !important;
   overflow-y: auto;
   font-family: 'DM Sans', sans-serif;
+  z-index: 200;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .as-brand {
@@ -356,9 +361,7 @@
   transform: translateY(-1px);
 }
 
-
-
-/* RESPONSIVE */
+   /* RESPONSIVE */
 @media (max-width: 1024px) {
   .as-sidebar { width: 220px; }
 }
